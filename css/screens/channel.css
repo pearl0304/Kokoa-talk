@@ -1,0 +1,12 @@
+.friends-screen__channel-list{
+    display: flex;
+    justify-content: space-between;
+    padding: var(--horizontal-space) 0px;
+}
+.channel_list-header span{
+    font-size: 18px;
+}
+.channel_list-header i{
+    justify-content: flex-end;
+}
+
