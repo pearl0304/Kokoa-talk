@@ -10,10 +10,9 @@
 @import "components/badge.css";
 
 /*Screen*/
+@import "screens/login.css";
 @import "screens/friends.css";
-@import "screens/channel.css";
-
-@import "login.css";
+@import "screens/find.css";
 
 body{
     color: #2e363e;
@@ -35,6 +34,9 @@ body{
 .welcome-header__text{
     width: 60%;
     opacity: 0.7;
+}
+.main-screen{
+    padding: 0px var(--horizontal-space);
 }
 
 .stress{
