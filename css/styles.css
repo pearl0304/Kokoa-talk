@@ -2,10 +2,12 @@
 @import "variables.css";
 
 /*Componets*/
+@import "components/list-main.css";
 @import "components/status-bar.css";
 @import "components/nav-bar.css";
 @import "components/screen-header.css";
 @import "components/user-component.css";
+@import "components/badge.css";
 
 /*Screen*/
 @import "screens/friends.css";
@@ -33,5 +35,10 @@ body{
 .welcome-header__text{
     width: 60%;
     opacity: 0.7;
+}
+
+.stress{
+    font-weight: 600;
+    font-size: 18px;
 }
 
