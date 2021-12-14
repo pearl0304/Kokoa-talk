@@ -85,6 +85,9 @@
     padding: 5px 25px;
     box-sizing: border-box;
 }
+#message-form i{
+    opacity: 0.5;
+}
 #message-form .message-form__coulum:first-child{width: 10%;}
 #message-form .message-form__coulum:last-child{
     width: 90%;
@@ -93,8 +96,8 @@
 #message-form .message-form__coulum:last-child > i,
 #message-form .message-form__coulum:last-child button{
     position: absolute;
-    right: 0;
-    top: 7px;
+    right: -3px;
+    top: 2px;
 }
 #message-form .message-form__coulum:last-child > i{
     right: 40px;
@@ -107,8 +110,21 @@
     border-radius: 20px;
     border: var(--main-border);
 }
+#message-form input::placeholder{
+    padding: 10px;
+}
 
 .message-form__coulum button{
     background-color: var(--yellow);
     border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.message-form__coulum button i{
+    opacity: 1;
+}
+.message-form__coulum button:focus,
+.message-form__coulum button:active{
+    outline: none;
 }
