@@ -1,6 +1,6 @@
 #chat-screen{
     background-color: #abc1d1;
-    height: 11000vh;
+    height: 100%;
 }
 #chat-screen .alt-header,
 #chat-screen .status-bar{
