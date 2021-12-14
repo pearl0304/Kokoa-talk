@@ -16,10 +16,24 @@
     position: relative;
     color: #2e363e;
 }
+
+@keyframes notificationAnimation{
+    0%{
+        transform: none;   
+    }
+    50%{
+        transform: translateY(-1px);
+    }
+    100%{
+        transform: none;
+    }
+}
+
 .nav__notification{
     position: absolute;
     left: 15px;
     bottom: 10px;
+    animation: notificationAnimation 2s ease-in-out infinite;
 }
 .nav__noti{
     display: block;
@@ -31,4 +45,6 @@
     position: absolute;
     left: 30px;
     bottom: 20px;
+    animation: notificationAnimation 2s ease-in-out infinite;
 }
+
