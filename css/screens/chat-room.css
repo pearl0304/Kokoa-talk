@@ -74,3 +74,41 @@
 }
 .message-row--own .message__info{flex-direction: row-reverse;}
 
+#message-form{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 25px;
+    box-sizing: border-box;
+}
+#message-form .message-form__coulum:first-child{width: 10%;}
+#message-form .message-form__coulum:last-child{
+    width: 90%;
+    position: relative;
+}
+#message-form .message-form__coulum:last-child > i,
+#message-form .message-form__coulum:last-child button{
+    position: absolute;
+    right: 0;
+    top: 7px;
+}
+#message-form .message-form__coulum:last-child > i{
+    right: 40px;
+    top: 10px;
+}
+
+#message-form input{
+    height: 30px;
+    width: 100%;
+    border-radius: 20px;
+    border: var(--main-border);
+}
+
+.message-form__coulum button{
+    background-color: var(--yellow);
+    border: none;
+}
