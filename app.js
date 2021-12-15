@@ -5,8 +5,7 @@ import router from "./routers/main_router.js"
 
 class App {
     constructor(){
-        this.app=express()
-
+        this.app = express()
         this.setViewEngine()
         this.setMiddleware()
         this.setStatic()
@@ -14,7 +13,7 @@ class App {
     }
 
     setViewEngine(){
-        this.app.set('views','public/views')
+        this.app.set('views','src/public/views')
         this.app.set('view engine', 'ejs')
     }
     setMiddleware(){
@@ -23,12 +22,12 @@ class App {
         }))
     
         this.app.use(cookeParser())
-        this.app.use(express.json());
+        this.app.use(express.json())
         this.app.use(express.urlencoded({extended:false}))
     }
 
     setStatic(){
-        this.app.use('/public',express.static('public/'))
+        this.app.use('/public',express.static('src/public/'))
         this.app.use('/uploads',express.static('uploads'))
     }
 
