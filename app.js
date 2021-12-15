@@ -33,6 +33,7 @@ class App {
 
     setStatic(){
         this.app.use('/public',express.static('src/public/'))
+        this.app.use('/js',express.static('src/public/js'))
         this.app.use('/uploads',express.static('uploads'))
     }
 
