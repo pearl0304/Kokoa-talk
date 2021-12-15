@@ -6,6 +6,7 @@
     box-sizing: border-box;
     justify-content: center;
     padding: 5px 3px;
+    font-size: 13px;
 }
 .status-bar__column{
     width: 33%;
