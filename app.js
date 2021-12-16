@@ -1,22 +1,20 @@
 import express from "express"
+import MongoClient from './models/config.js'
 import helmet from "helmet"
 import cookeParser from "cookie-parser"
 import router from "./routers/main_router.js"
-import mongoClient from "./models/cong.js"
-
 
 class App {
     constructor(){
         this.app = express()
-        this.db = this.getDbConfig()
+        this.db = MongoClient.connect()
+
         this.setViewEngine()
         this.setMiddleware()
         this.setStatic()
         this.getRouters()
     }
-
-    getDbConfig(){mongoClient}
-
+    getDbConfig(){this.db}
     setViewEngine(){
         this.app.set('views','src/public/views')
         this.app.set('view engine', 'ejs')
