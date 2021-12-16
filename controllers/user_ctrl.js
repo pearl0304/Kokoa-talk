@@ -3,9 +3,9 @@ import jwt from 'jsonwebtoken'
 
 export const userController = {
 
-    getRegisterPage : async(req,res)=>{
+    getsignUpPage : async(req,res)=>{
         try{
-            await res.render('register')  
+            await res.render('signUp')  
         }catch(e){
             console.error(e)
         }
@@ -57,7 +57,7 @@ export const userController = {
             }
             const emailCheck = await checkDuplicateEmail(data)
             if(emailCheck == 'NONE'){
-                res.send("<script>alert('There is no registered email. Please register first');location.href='/user/register';</script>")
+                res.send("<script>alert('There is no signUped email. Please signUp first');location.href='/user/signUp';</script>")
             }
 
             const userData = await findeUserData(data)

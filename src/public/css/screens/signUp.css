@@ -1,9 +1,9 @@
-#register-form{
+#signUp-form{
     display: flex;
     flex-direction: column;
     margin: 0px 30px;
 }
-#register-form input{
+#signUp-form input{
     border: none;
     padding: 10px 0px;
     font-size: 16px;
@@ -11,28 +11,28 @@
     margin-bottom: 25px;
     transition: border-color 0.3s ease-in-out;
 }
-#register-form input:not([type="submit"]){
+#signUp-form input:not([type="submit"]){
     border-bottom: 1px solid rgba(0,0,0,0.2);
     transition: border-color 0.3s ease-in-out;
     font-size: 14px;
 }
-#register-form input::placeholder{
+#signUp-form input::placeholder{
     color: rgba(0,0,0,0.4);
 }
-#register-form input:focus{
+#signUp-form input:focus{
     border-color: var(--yellow);
 }
-#register-form input[type="submit"]{
+#signUp-form input[type="submit"]{
     background-color: var(--yellow);
     cursor: pointer;
     padding: 20px 0px;
     border-radius: 5px;
 }
-.link-register{
+.link-signUp{
     align-items: center;
     text-align: center;
     color: rgba(0,0,0,0.4)
 }
-.link-register a:hover{
+.link-signUp a:hover{
     border-bottom: 1px solid lightgray;
 }

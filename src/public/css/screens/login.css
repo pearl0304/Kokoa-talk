@@ -28,11 +28,11 @@
     padding: 20px 0px;
     border-radius: 5px;
 }
-.link-register{
+.link-signUp{
     align-items: center;
     text-align: center;
     color: rgba(0,0,0,0.4)
 }
-.link-register a:hover{
+.link-signUp a:hover{
     border-bottom: 1px solid lightgray;
 }
