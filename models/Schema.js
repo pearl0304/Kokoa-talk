@@ -10,8 +10,7 @@ const userSchema = new Schema({
             if(!validator.isEmail(value)){
                 throw new Error("Email is invalid")
             }
-        }
-        
+        }       
     },
     userNick : {
         type : String,

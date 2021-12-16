@@ -1,5 +1,6 @@
-import {checkDuplicateEmail,checkDuplicateNick,insertUserData} from '../models/user.js'
-import Swal from 'sweetalert2'
+import {checkDuplicateEmail,checkDuplicateNick,insertUserData,findeUserData} from '../models/user.js'
+import jwt from 'jsonwebtoken'
+
 export const userController = {
 
     getRegisterPage : async(req,res)=>{
@@ -28,17 +29,63 @@ export const userController = {
             }
 
             await insertUserData(data)
-            res.render('friends')
+
+            // create token
+            const created_token = jwt.sign(
+                {
+                    userEmail:data['userEmail'],
+                    userNick : data['userNick']
+                }
+                , process.env.SECRET_CODE,
+                {
+                    expiresIn: '50m'
+                }
+            )
+            // Save token in Cookie
+            res.cookie('jwtToken',created_token)
+            req.body.userData={userEmail:data['userEmail'],userNick : data['userNick']}
+            res.render('friends',{userNick :data['userNick']})
         }catch(e){
             console.error(e)
         }
-    }
+    }, 
+    login : async(req,res)=>{
+        try{
+            const data = {
+                userEmail : req.body.userEmail,
+                userPw : req.body.userPw
+            }
+            const emailCheck = await checkDuplicateEmail(data)
+            if(emailCheck == 'NONE'){
+                res.send("<script>alert('There is no registered email. Please register first');location.href='/user/register';</script>")
+            }
+
+            const userData = await findeUserData(data)
+
+            // create token
+            const created_token = jwt.sign(
+                {
+                    userEmail:userData['userEmail'],
+                    userNick : userData['userNick']
+                }
+                , process.env.SECRET_CODE,
+                {
+                    expiresIn: '50m'
+                }
+            )
+            // Save token in Cookie
+            res.cookie('jwtToken',created_token)
+            req.body.userData={userEmail:userData['userEmail'],userNick : userData['userNick']}
+            res.render('friends',{userNick :userData['userNick']})
+            
 
 
 
 
 
+        }catch(e){
 
-
-
+        }
+    }   
 }
+

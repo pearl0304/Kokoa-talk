@@ -7,6 +7,8 @@ export async function checkDuplicateEmail(data){
         const email = await User.findOne({userEmail : data['userEmail']}).exec()
         if(email){
             return "DUPLICATE"            
+        }else{
+            return "NONE"
         }
     }catch(e){
         console.error(e)
@@ -18,6 +20,8 @@ export async function checkDuplicateNick(data){
         const nick = await User.findOne({userNick : data['userNick']}).exec()
         if(nick){
             return "DUPLICATE"
+        }else{
+            return "NONE"
         }
 
     }catch(e){
@@ -29,6 +33,16 @@ export async function insertUserData(data){
     try{
         const user = new User(data)
         await user.save()  
+    }catch(e){
+        console.error(e)
+    }
+}
+
+export async function findeUserData(data){
+    try{
+        const userData = await  User.findOne({userEmail:data['userEmail'], userPw:data['userPw']}).exec()
+        return userData
+
     }catch(e){
         console.error(e)
     }
