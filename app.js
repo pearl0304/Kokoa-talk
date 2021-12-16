@@ -1,20 +1,27 @@
 import express from "express"
-import MongoClient from './models/config.js'
+import mongoose from "mongoose"
 import helmet from "helmet"
 import cookeParser from "cookie-parser"
 import router from "./routers/main_router.js"
+import dotenv from "dotenv"
+dotenv.config()
+const {MONGO_KOKOA_URI} = process.env
 
 class App {
     constructor(){
         this.app = express()
-        this.db = MongoClient.connect()
-
+        this.getDbConn()
         this.setViewEngine()
         this.setMiddleware()
         this.setStatic()
         this.getRouters()
     }
-    getDbConfig(){this.db}
+    getDbConn(){
+        mongoose
+        .connect(MONGO_KOKOA_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+        .then(() => console.log('Successfully connected to mongodb'))
+        .catch(e => console.error(e));
+    }
     setViewEngine(){
         this.app.set('views','src/public/views')
         this.app.set('view engine', 'ejs')
