@@ -1,7 +1,7 @@
 #signUp-form{
     display: flex;
     flex-direction: column;
-    margin: 0px 30px;
+    margin: -70px 30px;
 }
 #signUp-form input{
     border: none;
@@ -35,4 +35,11 @@
 }
 .link-signUp a:hover{
     border-bottom: 1px solid lightgray;
+}
+.profile{
+    margin-bottom: 20px;
+    text-align: center;
+}
+.profile .plus-icon{
+    margin-left: -30px;
 }

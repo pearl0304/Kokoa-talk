@@ -6,7 +6,14 @@
     <header class="welcome-header">
         <h1 class="welcome-header__title">Welcome to Kokoa Talk</h1>
     </header>
-    <form id="signUp-form" action="/user/signUp" method="post">
+    <form id="signUp-form" action="/user/signUp" method="post" enctype="multipart/form-data">
+        <div class="profile">
+            <input id="profile-img" type="file" name="profile-img" class="hidden">
+            <label for="profile-img">
+                <img src="/public/images/profile.svg" alt="profile-icon" class="profile-img">
+                <img src="/public/images/plus.svg" alt="plus-icon" class="plus-icon">
+            </label>
+        </div>
         <input type="email" name="userEmail" placeholder="Email or phone number" required/>
         <input type="text" name="userNick" minlength="2" maxlength="8" 
                placeholder="Please enter the nickname you want to use (2~8)" required/>

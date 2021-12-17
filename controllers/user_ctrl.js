@@ -10,15 +10,23 @@ export const userController = {
             console.error(e)
         }
     },
-
+    tmp : async(req,res)=>{
+        console.log(req.file)
+    },
     insertUser : async(req,res)=>{
         try{
+            let filename = '/public/images/profile.svg'
+            if(req.file){
+                filename = `/uploads/profile/${req.file.filename}` 
+            }
             const data = {
                 userEmail : req.body.userEmail,
                 userNick : req.body.userNick,
-                userPw : req.body.userPw
+                userPw : req.body.userPw,
+                profileImg : filename 
             }
-            // check duplicate Email and Nick
+
+            //check duplicate Email and Nick
             const emailCheck = await checkDuplicateEmail(data)
             if(emailCheck == 'DUPLICATE'){
                 res.send("<script>alert('This EMAIL is already in use');history.back();</script>")

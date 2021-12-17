@@ -20,6 +20,9 @@ const userSchema = new Schema({
         type : String,
         required : true
     },
+    profileImg :{
+        type : String
+    },
     reg_dt : {
         type : Date,
         default : Date.now

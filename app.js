@@ -45,7 +45,6 @@ class App {
     getRouters(){
         this.app.use(router)
     }
-
 }
 
 export default App
