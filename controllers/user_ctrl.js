@@ -5,7 +5,7 @@ export const userController = {
 
     getsignUpPage : async(req,res)=>{
         try{
-            await res.render('signUp')  
+            res.render('signUp')  
         }catch(e){
             console.error(e)
         }
@@ -52,7 +52,7 @@ export const userController = {
             // Save token in Cookie
             res.cookie('jwtToken',created_token)
             req.body.userData={userEmail:data['userEmail'],userNick : data['userNick']}
-            res.render('friends',{userNick :data['userNick']})
+            res.send("<script>location.href='/friends'</script>")
         }catch(e){
             console.error(e)
         }
@@ -78,19 +78,13 @@ export const userController = {
                 }
                 , process.env.SECRET_CODE,
                 {
-                    expiresIn: '50m'
+                    expiresIn: '1m'
                 }
             )
             // Save token in Cookie
             res.cookie('jwtToken',created_token)
             req.body.userData={userEmail:userData['userEmail'],userNick : userData['userNick']}
-            res.render('friends',{userNick :userData['userNick']})
-            
-
-
-
-
-
+            res.send("<script>location.href='/friends'</script>")
         }catch(e){
 
         }

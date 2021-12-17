@@ -12,17 +12,16 @@
         </div>
     </header>
     <a id="friends-display-link">
-        <i class="fas fa-info-circle"></i>
-        Friends' Names Display
+        <i class="fas fa-info-circle"></i>Friends' Names Display
         <i class="fas fa-chevron-right fa-xs"></i>
     </a>
     <main class="main-screen">
         <div class="user-component">
             <div class="user-component__column">
-                <img src="https://img.insight.co.kr/static/2020/12/13/700/img_20201213152823_hh576838.webp" 
+                <img src="<%=profileImg%>" 
                      class="user-component__profile user-component__profile--xl"/>
                 <div class="user-component__text">
-                    <h4 class="user-component__title">Kylie</h4>
+                    <h4 class="user-component__title"><%=userNick%></h4>
                     <!-- <h6 class="user-component__subtitle">this text whatever</h6> -->
                 </div>
             </div>
@@ -76,8 +75,8 @@
         </div> 
     </main>
     <%- include('include/tabbar.ejs')%>
-    <div id="splash-screen">
+    <!-- <div id="splash-screen">
         <i class="fas fa-comment"></i>
-    </div>
+    </div> -->
     
 <%- include('include/tail.ejs')%>

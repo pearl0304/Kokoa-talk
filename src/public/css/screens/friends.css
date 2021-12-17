@@ -2,12 +2,13 @@
     text-align: center;
     display: block;
     background-color: #fafafa;
-    padding: 15px 0px;
+    padding: 10px 0px;
     font-size: 15px;
     margin-bottom: 20px;
     margin-top: -15px;
 }
 #friends-display-link i {
+    margin-right: 5px;
     color: rgba(0, 0, 0, 0.3);
 }
 

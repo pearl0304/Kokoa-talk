@@ -47,3 +47,13 @@ export async function findeUserData(data){
         console.error(e)
     }
 }
+
+export async function findUserDataByEmail(data){
+    try{
+        const userData = await  User.findOne({userEmail:data['userEmail']}).exec()
+        return userData
+
+    }catch(e){
+        console.error(e)
+    }
+}
