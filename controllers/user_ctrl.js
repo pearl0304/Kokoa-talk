@@ -78,7 +78,7 @@ export const userController = {
                 }
                 , process.env.SECRET_CODE,
                 {
-                    expiresIn: '1m'
+                    expiresIn: '50m'
                 }
             )
             // Save token in Cookie

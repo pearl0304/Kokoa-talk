@@ -13,3 +13,9 @@
 .screen-header__icons span{
     margin-left: 20px;
 }
+.main__list-header a,
+.main__list-header-freinds a
+:hover{
+    cursor: pointer;
+}
+
