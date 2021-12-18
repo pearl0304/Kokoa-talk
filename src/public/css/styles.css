@@ -19,6 +19,7 @@
 @import "screens/more.css";
 @import "screens/setting.css";
 @import "screens/chat-room.css";
+@import "screens/user-profile.css";
 
 body{
     color: #2e363e;
