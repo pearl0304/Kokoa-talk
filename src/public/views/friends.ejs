@@ -57,6 +57,7 @@
         </div>
        <%for(let i=0; i<friends.length; i++){%> 
        <div id="friends_list" class="main__list-component list-reapeat">
+           <a href="/user/profile/:<%=friends[i]['userNick']%>">
             <div class="main__list-component__column">
                 <img id="friend-profile"src="<%=friends[i]['profileImg']%>" 
                      class="main__list__profile"/>
@@ -65,6 +66,7 @@
                     <h6 class="main__list__profile__subtitle">this text whatever</h6>
                 </div>
             </div>
+           </a>
         </div>
         <%}%> 
     </main>

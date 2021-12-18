@@ -8,5 +8,6 @@ import { userController } from "../controllers/user_ctrl.js"
 userRouter.get('/signUp',userController.getsignUpPage)
 userRouter.post('/signUp',upload.single('profile-img'),userController.insertUser)
 userRouter.post('/login',userController.login)
+userRouter.get('/profile/:userNick',userController.getUserProfliePage)
 
 export default userRouter
