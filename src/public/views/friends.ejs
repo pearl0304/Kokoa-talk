@@ -48,15 +48,15 @@
             </div>
         </div>
         <div class="main__list">
-            <div class="main__list-header-freinds">
+            <div class="main__list-header-friends">
                 <span>Friends</span>
                 <span><%=friendsCount%></span>
-                <a id="main__list-chevron-up" class="hidden"><i class="fas fa-chevron-up fa-xs"></i></a>
-                <a id="main__list-chevron-down"><i class="fas fa-chevron-down fa-xs"></i></a>
+                <a id="friends__list-chevron-up" class="hidden"><i class="fas fa-chevron-up fa-xs"></i></a>
+                <a id="friends__list-chevron-down"><i class="fas fa-chevron-down fa-xs"></i></a>
             </div>
         </div>
        <%for(let i=0; i<friends.length; i++){%> 
-       <div id="main_list" class="main__list-component list-reapeat hidden">
+       <div id="friends_list" class="main__list-component list-reapeat">
             <div class="main__list-component__column">
                 <img id="friend-profile"src="<%=friends[i]['profileImg']%>" 
                      class="main__list__profile"/>

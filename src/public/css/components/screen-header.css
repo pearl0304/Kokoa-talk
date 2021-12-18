@@ -14,7 +14,7 @@
     margin-left: 20px;
 }
 .main__list-header a,
-.main__list-header-freinds a
+.main__list-header-friends a
 :hover{
     cursor: pointer;
 }
