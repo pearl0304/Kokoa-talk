@@ -18,7 +18,8 @@
 .icons__profile__right i{
     padding: 0px 8px;
 }
-.screen-header__icons__profile a:hover{
+.screen-header__icons__profile a:hover,
+.profile-icon__list:hover{
     cursor: pointer;
     color: var(--yellow);
 }
@@ -41,6 +42,10 @@
     height:140px;
     border-radius: 50%;
     margin-bottom: 20px;
+}
+
+.profile-profileImg img{
+    width: 100%;
 }
 
 .profile-icon__lists{

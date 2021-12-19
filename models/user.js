@@ -57,3 +57,12 @@ export async function findUserDataByEmail(data){
         console.error(e)
     }
 }
+
+export async function findUserDataByNick(userNick){
+    try{
+        const userData = await  User.findOne({userNick:userNick}).exec()
+        return userData
+    }catch(e){
+        console.error(e)
+    }
+}

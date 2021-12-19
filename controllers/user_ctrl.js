@@ -1,4 +1,8 @@
-import {checkDuplicateEmail,checkDuplicateNick,insertUserData,findeUserData} from '../models/user.js'
+import {checkDuplicateEmail,
+        checkDuplicateNick,
+        insertUserData,
+        findeUserData,
+        findUserDataByNick} from '../models/user.js'
 import jwt from 'jsonwebtoken'
 
 export const userController = {
@@ -91,8 +95,11 @@ export const userController = {
     },
     getUserProfliePage : async(req,res)=>{
         try{
-
-            res.render('user_profile')
+            const params = req.params['userNick']
+            const userNick = params.slice(1,params.length)
+            const userData = await findUserDataByNick(userNick)
+            
+            res.render('user_profile',{userNick:userData['userNick'],profileImg:userData['profileImg']})
 
         }catch(e){
             console.error(e)
@@ -100,8 +107,11 @@ export const userController = {
     },
     getMyProfliePage : async(req,res)=>{
         try{
-
-            res.render('my_profile')
+            const params = req.params['userNick']
+            const userNick = params.slice(1,params.length)
+            const userData = await findUserDataByNick(userNick)
+            
+            res.render('my_profile',{userNick:userData['userNick'],profileImg:userData['profileImg']})
 
         }catch(e){
             console.error(e)
