@@ -16,12 +16,29 @@
         </div>
     </header>  
     <main class="profile__wrap">
-        <div class="profile">
-            <div class="profile-profileImg">
-                <img src="<%=profileImg%>">
+        <form id="profile-form" action="" method="post" enctype="multipart/form-data" >  
+            <div class="profile">
+                <div class="profile-profileImg">
+                    <img src="<%=profileImg%>">
+                    <div class="profile-profileImg__plus">
+                        <input id="profile-img" type="file" name="profile-img" class="hidden"/>
+                        <label for="profile-img">
+                            <i class="fas fa-camera fa-lg"></i>
+                        </label>    
+                    </div>
+                </div>
+                <span class="profile-userNick"><%=userNick%></span>
+                <div class="profile-statusMessage">
+                    <input id="statusMessage" name="statusMessage" type="text" placeholder="Enter a status message." maxlength="60"/>
+                    <input id="profile-btn" name="profile-btn" class="hidden" type="submit">
+                    <label id="profile-btn" for="profile-btn">
+                        <i class="fas fa-pencil-alt"></i>
+                    </label>
+                   
+                </div>
+                
             </div>
-            <span class="profile-userNick"><%=userNick%></span>
-        </div>
+        </form>
         <div class="profile-icon__lists">
             <div class="profile-icon__list">
                 <i class="fas fa-comment"></i>
@@ -37,4 +54,5 @@
             </div>    
         </div>
     </main>   
+    <script src="/js/my_profile.js"></script>
 <%- include('include/tail.ejs')%>
