@@ -50,7 +50,7 @@ export const userController = {
                 }
                 , process.env.SECRET_CODE,
                 {
-                    expiresIn: '50m'
+                    expiresIn: '1day'
                 }
             )
             // Save token in Cookie
@@ -82,7 +82,7 @@ export const userController = {
                 }
                 , process.env.SECRET_CODE,
                 {
-                    expiresIn: '50m'
+                    expiresIn: '1day'
                 }
             )
             // Save token in Cookie

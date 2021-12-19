@@ -39,8 +39,8 @@
 }
 .profile-profileImg{
     background-color: whitesmoke;
-    width: 140px;
-    height:140px;
+    width: 120px;
+    height:120px;
     border-radius: 50%;
     margin-bottom: 20px;
     position: relative;
@@ -48,16 +48,19 @@
 
 .profile-profileImg img{
     width: 100%;
+    height: 100%;
+    border-radius: 50%;
 }
+
 .profile-profileImg__plus{
     position: absolute;
-    top: 110px;
-    right: 2px;
+    top: 93px;
+    right: 5px;
     color: gray;
 }
 
 .profile-profileImg__plus i{
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .profile-userNick {
@@ -79,7 +82,7 @@
 }
 .profile-icon__list i{
     margin-bottom: 12px;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 /*edit profile*/
@@ -99,4 +102,7 @@
 .profile-statusMessage input:focus{
     color: white;
     border-bottom: 1px solid var(--yellow);
+}
+.profile-icon__name {
+    font-size: 14px;
 }
