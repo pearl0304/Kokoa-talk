@@ -101,7 +101,7 @@ export const userController = {
     getMyProfliePage : async(req,res)=>{
         try{
 
-            res.render('user_profile')
+            res.render('my_profile')
 
         }catch(e){
             console.error(e)
