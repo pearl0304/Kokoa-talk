@@ -3,3 +3,26 @@
     height: 100%;
 }
 
+.screen-header__icons__profile{
+    display: flex;
+    width: 100%;
+    color: white;
+}
+.icons__profile__left{
+    width: 50%;
+}
+.icons__profile__right {
+    width: 50%;
+    text-align: end;
+}
+.icons__profile__right i{
+    padding: 0px 8px;
+}
+.screen-header__icons__profile a:hover{
+    cursor: pointer;
+    color: var(--yellow);
+}
+
+.profile__wrap{
+    background-color: tomato;
+}

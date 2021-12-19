@@ -97,6 +97,15 @@ export const userController = {
         }catch(e){
             console.error(e)
         } 
+    },
+    getMyProfliePage : async(req,res)=>{
+        try{
+
+            res.render('user_profile')
+
+        }catch(e){
+            console.error(e)
+        } 
     }   
 }
 

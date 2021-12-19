@@ -9,5 +9,6 @@ userRouter.get('/signUp',userController.getsignUpPage)
 userRouter.post('/signUp',upload.single('profile-img'),userController.insertUser)
 userRouter.post('/login',userController.login)
 userRouter.get('/profile/:userNick',userController.getUserProfliePage)
+userRouter.get('/myProfile/:userNick',userController.getMyProfliePage)
 
 export default userRouter
