@@ -20,7 +20,7 @@
             <div class="profile">
                 <div class="profile-profileImg">
                     <img src="<%=profileImg%>">
-                    <div class="profile-profileImg__plus">
+                    <div id="profile-img-btn" class="profile-profileImg__plus hidden">
                         <input id="profile-img" type="file" name="profile-img" class="hidden"/>
                         <label for="profile-img">
                             <i class="fas fa-camera fa-lg"></i>
@@ -28,13 +28,12 @@
                     </div>
                 </div>
                 <span class="profile-userNick"><%=userNick%></span>
-                <div class="profile-statusMessage">
+                <div id="status-message" class="profile-statusMessage hidden">
                     <input id="statusMessage" name="statusMessage" type="text" placeholder="Enter a status message." maxlength="60"/>
                     <input id="profile-btn" name="profile-btn" class="hidden" type="submit">
                     <label id="profile-btn" for="profile-btn">
                         <i class="fas fa-pencil-alt"></i>
-                    </label>
-                   
+                    </label>       
                 </div>
                 
             </div>
@@ -44,7 +43,7 @@
                 <i class="fas fa-comment"></i>
                 <span class="profile-icon__name">My Chatroom</span>
             </div>
-            <div class="profile-icon__list">
+            <div id="profile__edit-btn"class="profile-icon__list">
                 <i class="fas fa-pencil-alt"></i>
                 <span class="profile-icon__name">Edit Profile</span>
             </div>
