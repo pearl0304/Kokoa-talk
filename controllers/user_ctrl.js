@@ -1,5 +1,4 @@
 import {checkDuplicateEmail,
-        checkDuplicateNick,
         insertUserData,
         findeUserData,
         findUserDataByNick} from '../models/user.js'
@@ -34,10 +33,6 @@ export const userController = {
             const emailCheck = await checkDuplicateEmail(data)
             if(emailCheck == 'DUPLICATE'){
                 res.send("<script>alert('This EMAIL is already in use');history.back();</script>")
-            }
-            const nickCheck = await checkDuplicateNick(data)
-            if(nickCheck == 'DUPLICATE'){
-                res.send("<script>alert('This NICK NAME is already in use');history.back();</script>")
             }
 
             await insertUserData(data)

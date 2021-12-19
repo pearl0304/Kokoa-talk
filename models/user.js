@@ -14,21 +14,6 @@ export async function checkDuplicateEmail(data){
         console.error(e)
     }
 }
-
-export async function checkDuplicateNick(data){
-    try{
-        const nick = await User.findOne({userNick : data['userNick']}).exec()
-        if(nick){
-            return "DUPLICATE"
-        }else{
-            return "NONE"
-        }
-
-    }catch(e){
-        console.error(e)
-    }
-}
-
 export async function insertUserData(data){
     try{
         const user = new User(data)
