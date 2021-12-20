@@ -57,20 +57,23 @@
                 <a id="friends__list-chevron-down"><i class="fas fa-chevron-down fa-xs"></i></a>
             </div>
         </div>
-       <%for(let i=0; i<friends.length; i++){%> 
-       <div id="friends_list" class="main__list-component list-reapeat">
-           <a href="/user/profile/:<%=friends[i]['_id']%>">
-            <div class="main__list-component__column">
-                <img id="friend-profile"src="<%=friends[i]['profileImg']%>" 
-                     class="main__list__profile"/>
-                <div class="main__list__text">
-                    <h4 id="friend-nick" class="main__list__title"><%=friends[i]['userNick']%></h4>
-                    <h6 class="main__list__profile__subtitle"><%=friends[i]['statusMessage']%></h6>
-                </div>
-            </div>
-           </a>
+        <div id="friends_list_wrap">
+            <%for(let i=0; i<friends.length; i++){%> 
+                <div id="friends_list" class="main__list-component list-reapeat">
+                    <a href="/user/profile/:<%=friends[i]['_id']%>">
+                        <div class="main__list-component__column">
+                            <img id="friend-profile"src="<%=friends[i]['profileImg']%>" 
+                                class="main__list__profile"/>
+                            <div class="main__list__text">
+                                <h4 id="friend-nick" class="main__list__title"><%=friends[i]['userNick']%></h4>
+                                <h6 class="main__list__profile__subtitle"><%=friends[i]['statusMessage']%></h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>  
+            <%}%> 
         </div>
-        <%}%> 
+
     </main>
     <%- include('include/tabbar.ejs')%>
     <!-- <div id="splash-screen">
