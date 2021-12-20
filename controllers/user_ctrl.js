@@ -1,7 +1,9 @@
+import { ObjectId } from 'mongodb'
 import {checkDuplicateEmail,
         insertUserData,
         findeUserData,
-        findUserDataByNick} from '../models/user.js'
+        findUserDataById,
+        findUserDataByEmail} from '../models/user.js'
 import jwt from 'jsonwebtoken'
 
 export const userController = {
@@ -26,7 +28,8 @@ export const userController = {
                 userEmail : req.body.userEmail,
                 userNick : req.body.userNick,
                 userPw : req.body.userPw,
-                profileImg : filename 
+                profileImg : filename ,
+                statusMessage : ''
             }
 
             //check duplicate Email and Nick
@@ -36,12 +39,14 @@ export const userController = {
             }
 
             await insertUserData(data)
-
+            const userData = await findUserDataByEmail(data)
+            console.log(userData['_id'])
+     
             // create token
             const created_token = jwt.sign(
                 {
-                    userEmail:data['userEmail'],
-                    userNick : data['userNick']
+                    userEmail:userData['userEmail'],
+                    _id : userData['_id']
                 }
                 , process.env.SECRET_CODE,
                 {
@@ -50,7 +55,7 @@ export const userController = {
             )
             // Save token in Cookie
             res.cookie('jwtToken',created_token)
-            req.body.userData={userEmail:data['userEmail'],userNick : data['userNick']}
+            req.body.userData={userEmail:userData['userEmail'], _id: userData['_id']}
             res.send("<script>location.href='/friends'</script>")
         }catch(e){
             console.error(e)
@@ -68,12 +73,12 @@ export const userController = {
             }
 
             const userData = await findeUserData(data)
-
+ 
             // create token
             const created_token = jwt.sign(
                 {
                     userEmail:userData['userEmail'],
-                    userNick : userData['userNick']
+                    _id : userData['_id']
                 }
                 , process.env.SECRET_CODE,
                 {
@@ -82,7 +87,7 @@ export const userController = {
             )
             // Save token in Cookie
             res.cookie('jwtToken',created_token)
-            req.body.userData={userEmail:userData['userEmail'],userNick : userData['userNick']}
+            req.body.userData={userEmail:userData['userEmail'], _id:userData['_id']}
             res.send("<script>location.href='/friends'</script>")
         }catch(e){
 
@@ -90,11 +95,12 @@ export const userController = {
     },
     getUserProfliePage : async(req,res)=>{
         try{
-            const params = req.params['userNick']
-            const userNick = params.slice(1,params.length)
-            const userData = await findUserDataByNick(userNick)
-            
-            res.render('user_profile',{userNick:userData['userNick'],profileImg:userData['profileImg']})
+            const params = req.params['id']
+            const id = params.slice(1,params.length)
+            const _id = ObjectId(id)
+
+            const userData = await findUserDataById(_id)            
+            res.render('user_profile',{userNick:userData['userNick'],profileImg:userData['profileImg'],statusMessage:userData['statusMessage'],_id:userData['_id']})
 
         }catch(e){
             console.error(e)
@@ -102,15 +108,27 @@ export const userController = {
     },
     getMyProfliePage : async(req,res)=>{
         try{
-            const params = req.params['userNick']
-            const userNick = params.slice(1,params.length)
-            const userData = await findUserDataByNick(userNick)
-            
-            res.render('my_profile',{userNick:userData['userNick'],profileImg:userData['profileImg']})
+            const tokenData = (req.body.userData['_id'])        
+            const params = req.params['id']
+            const id = params.slice(1,params.length)
+
+            if(tokenData !== id) {
+                res.send("<script>alert('Invalid access path');location.href='/user/login';</script>")
+            }
+
+            const _id = ObjectId(id)
+            const userData = await findUserDataById(_id)
+            res.render('my_profile',{userNick:userData['userNick'],profileImg:userData['profileImg'],statusMessage:userData['statusMessage'],_id:userData['_id']})
 
         }catch(e){
             console.error(e)
         } 
-    }   
+    },
+    updateMyProflie : async(req,res)=>{
+        //console.log(req.body.userData)
+        //console.log(req.body)
+    }
+
+       
 }
 

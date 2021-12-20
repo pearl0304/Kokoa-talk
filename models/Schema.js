@@ -24,6 +24,9 @@ const userSchema = new Schema({
     profileImg :{
         type : String
     },
+    statusMessage :{
+        type : String
+    },
     reg_dt : {
         type : Date,
         default : Date.now

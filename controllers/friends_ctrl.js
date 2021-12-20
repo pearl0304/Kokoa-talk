@@ -12,6 +12,8 @@ export const friendsController = {
             res.render('friends',{
                 userNick :userData['userNick'],
                 profileImg:userData['profileImg'],
+                statusMessage:userData['statusMessage'],
+                _id : userData['_id'],
                 friendsCount:friendsCount,
                 friends
             })

@@ -16,15 +16,8 @@ export const mainController = {
             else{
                 const secretKey = process.env.SECRET_CODE
                 const tokenData = jwt.verify(token,secretKey)
-                const expire =  parseInt(tokenData['exp']+'000') 
-                const now = Date.now()
-    
-                if(expire < now){
-                    res.send("<script>alert('Your login session has expired. Pleas login in again');location.href='/';</script>")
-                }else{
-                    req.body.userData = tokenData
-                    next()
-                }
+                req.body.userData = tokenData
+                next()
             }
         }catch(e){
             console.error(e)

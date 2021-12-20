@@ -43,9 +43,9 @@ export async function findUserDataByEmail(data){
     }
 }
 
-export async function findUserDataByNick(userNick){
+export async function findUserDataById(_id){
     try{
-        const userData = await  User.findOne({userNick:userNick}).exec()
+        const userData = await  User.findOne({_id:_id}).exec()
         return userData
     }catch(e){
         console.error(e)
