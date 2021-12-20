@@ -2,7 +2,7 @@ import { ObjectId } from 'mongodb'
 import {checkDuplicateEmail,
         insertUserData,
         findeUserData,findUserDataById,findUserDataByEmail,
-        updateUserProfileImg,updateUserNick,updateUserStatusMessage
+        updateUserProfileImg,updateUserNick,updateUserStatusMessage,updateAllUserProfileInfo
     } from '../models/user.js'
 import jwt from 'jsonwebtoken'
 
@@ -124,27 +124,53 @@ export const userController = {
     updateMyProflie : async(req,res)=>{
         const tokenData = req.body.userData['_id']
         const _id = ObjectId(tokenData)
-
         const userData = await findUserDataById(_id)
-        const profileImg = ''
-        const edit_nick = req.body.userNick
-        const edit_statusMessage = req.body.statusMessage  
+        const editUserNick = req.body.userNick
+        const editStatusMessage = req.body.statusMessage
+        
 
-        if(req.file){
-            profileImg = `/uploads/profile/${req.file.filename}`   
-            await updateUserProfileImg(_id,profileImg) 
- 
-        }else{
-            profileImg =  userData['profileImg']
+        if(req.file&&editUserNick&&editStatusMessage){
+            const editProfileImg = `/uploads/profile/${req.file.filename}` 
+            await updateAllUserProfileInfo(_id,editProfileImg,editUserNick,editStatusMessage)
+
+            userData['profileImg'] =editProfileImg 
+            userData['userNick']=editUserNick
+            userData['statusMessage']=editStatusMessage
+
+        }else if(req.file&&editUserNick){
+            const editProfileImg = `/uploads/profile/${req.file.filename}` 
+            await updateUserProfileImg(_id,editProfileImg)
+            await updateUserNick(_id,editUserNick)
+
+            userData['profileImg'] =editProfileImg 
+            userData['userNick']=editUserNick
+
+        }else if(req.file&&editStatusMessage){
+            const editProfileImg = `/uploads/profile/${req.file.filename}` 
+            await updateUserProfileImg(_id,editProfileImg)
+            await updateUserStatusMessage(_id,editStatusMessage)
+
+            userData['profileImg'] =editProfileImg 
+            userData['statusMessage']=editStatusMessage
+
+        }else if( (req.file&&!editUserNick) || (req.file&&!editStatusMessage) || (req.file&&!editUserNick&&!editStatusMessage)){
+            const editProfileImg = `/uploads/profile/${req.file.filename}` 
+            await updateUserProfileImg(_id,editProfileImg)
+            
+            userData['profileImg'] =editProfileImg
+
+        }else if ((!req.file&&editUserNick)||(editUserNick&&!editStatusMessage)||(!req.file&&editUserNick&&!editStatusMessage)){
+            await updateUserNick(_id,editUserNick) 
+            
+            userData['userNick']=editUserNick
+
+        }else if ((!req.file&&!editUserNick)||(!editUserNick&&editStatusMessage)||(!req.file&&!editUserNick&&editStatusMessage)){
+            await updateUserStatusMessage(_id,editStatusMessage)
+            
+            userData['statusMessage']=editStatusMessage
         }
   
-  
-
-
-
-
-
-        res.render('my_profile',{userNick:edit_nick,profileImg:edit_filename,statusMessage:edit_statusMessage,_id:_id})
+        res.render('my_profile',{userNick:userData['userNick'],profileImg:userData['profileImg'],statusMessage:userData['statusMessage'],_id:_id})
 
     }
 

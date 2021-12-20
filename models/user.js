@@ -76,3 +76,11 @@ export async function updateUserStatusMessage(_id,statusMessage){
 
     }
 }
+
+export async function updateAllUserProfileInfo(_id,editProfileImg,editUserNick,editStatusMessage){
+    try{
+        await User.updateOne({_id:_id},{$set:{profileImg:editProfileImg,userNick:editUserNick,statusMessage:editStatusMessage,}}).exec()
+    }catch(e){
+        console.error(e)
+    }
+}
