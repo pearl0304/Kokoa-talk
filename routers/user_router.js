@@ -11,5 +11,8 @@ userRouter.post('/signUp',upload.single('profile-img'),userController.insertUser
 userRouter.post('/login',userController.login)
 userRouter.get('/profile/:id',userController.getUserProfliePage)
 userRouter.get('/myProfile/:id',mainController.getTokenData,userController.getMyProfliePage)
-userRouter.post('/myProfile',mainController.getTokenData,userController.updateMyProflie)
+userRouter.post('/myProfile',upload.single('profileImg'),mainController.getTokenData,userController.updateMyProflie)
+
+
+
 export default userRouter

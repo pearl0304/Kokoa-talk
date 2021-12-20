@@ -21,13 +21,14 @@
                 <div class="profile-profileImg">
                     <img src="<%=profileImg%>">
                     <div id="profile-img-btn" class="profile-profileImg__plus hidden">
-                        <input id="profile-img" type="file" name="profile-img" class="hidden"/>
+                        <input id="profile-img" type="file" name="profileImg" class="hidden"/>
                         <label for="profile-img">
                             <i class="fas fa-camera fa-lg"></i>
                         </label>    
                     </div>
                 </div>
                 <span id="origin-userNick" class="profile-userNick"><%=userNick%></span>  
+                <span id="origin-statusMessage" class="profile-statusMessage"><%=statusMessage%></span> 
                 <div class="profile-edit__warp">
                     <div id="profile-edit" class="profile-edit__text hidden">
                         <input id="userNick" name="userNick" type="text" placeholder="<%=userNick%>" minlength="2" maxlength="8" />

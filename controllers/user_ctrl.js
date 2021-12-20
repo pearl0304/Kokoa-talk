@@ -1,9 +1,9 @@
 import { ObjectId } from 'mongodb'
 import {checkDuplicateEmail,
         insertUserData,
-        findeUserData,
-        findUserDataById,
-        findUserDataByEmail} from '../models/user.js'
+        findeUserData,findUserDataById,findUserDataByEmail,
+        updateUserProfileImg,updateUserNick,updateUserStatusMessage
+    } from '../models/user.js'
 import jwt from 'jsonwebtoken'
 
 export const userController = {
@@ -14,9 +14,6 @@ export const userController = {
         }catch(e){
             console.error(e)
         }
-    },
-    tmp : async(req,res)=>{
-        console.log(req.file)
     },
     insertUser : async(req,res)=>{
         try{
@@ -125,8 +122,30 @@ export const userController = {
         } 
     },
     updateMyProflie : async(req,res)=>{
-        //console.log(req.body.userData)
-        //console.log(req.body)
+        const tokenData = req.body.userData['_id']
+        const _id = ObjectId(tokenData)
+
+        const userData = await findUserDataById(_id)
+        const profileImg = ''
+        const edit_nick = req.body.userNick
+        const edit_statusMessage = req.body.statusMessage  
+
+        if(req.file){
+            profileImg = `/uploads/profile/${req.file.filename}`   
+            await updateUserProfileImg(_id,profileImg) 
+ 
+        }else{
+            profileImg =  userData['profileImg']
+        }
+  
+  
+
+
+
+
+
+        res.render('my_profile',{userNick:edit_nick,profileImg:edit_filename,statusMessage:edit_statusMessage,_id:_id})
+
     }
 
        

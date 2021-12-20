@@ -45,9 +45,34 @@ export async function findUserDataByEmail(data){
 
 export async function findUserDataById(_id){
     try{
-        const userData = await  User.findOne({_id:_id}).exec()
+        const userData = await User.findOne({_id:_id}).exec()
         return userData
     }catch(e){
         console.error(e)
+    }
+}
+
+export async function updateUserProfileImg(_id,profileImg){
+    try{
+        await User.updateOne({_id:_id},{$set:{profileImg:profileImg}}).exec()
+
+    }catch(e){
+        console.error(e)
+    }
+}
+
+export async function updateUserNick(_id,userNick){
+    try{
+        await User.updateOne({_id:_id},{$set:{userNick:userNick}}).exec()
+    }catch(e){
+
+    }
+}
+
+export async function updateUserStatusMessage(_id,statusMessage){
+    try{
+        await User.updateOne({_id:_id},{$set:{statusMessage:statusMessage}}).exec()
+    }catch(e){
+
     }
 }
