@@ -86,20 +86,31 @@
 }
 
 /*edit profile*/
-.profile-statusMessage input{
+.profile-edit__warp{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 18px;
+}
+.profile-edit__text{
+    display: flex;
+    flex-direction: column;
+}
+.profile-edit__text input{
     width: 230px;
     height: 20px;
     margin-right: 6px;
     border: none;
     border-bottom: 1px solid white;
     background-color: transparent;
+    margin-bottom: 10px;
 }
-.profile-statusMessage input::placeholder{
+.profile-edit__text input::placeholder{
     color: white;
     font-size: 14px;
     text-align: center;
 }
-.profile-statusMessage input:focus{
+.profile-edit__text input:focus{
     color: white;
     border-bottom: 1px solid var(--yellow);
 }
