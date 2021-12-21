@@ -11,18 +11,22 @@ export const chatController = {
             const friendsData = []
 
             const mychannelList = await findMyChannelList(userId)
+     
             mychannelList.forEach((element)=>{
-                for(let i=0; i<mychannelList.length;i++){
+      
+                for(let i=0; i<2;i++){
                     const arr = element['channelUsers'][i]
                     tmp.push(arr)           
                 } 
             })
+    
             const friendsId = tmp.filter(id => String(id) !== String(userId))
 
             for(let j=0; j<friendsId.length;j++){
                 const result = await findUserDataById(friendsId[j])
                 friendsData.push(result)
             }
+
             res.render('chat-list',{friendsData:friendsData})
         }catch(e){
             console.error(e)
