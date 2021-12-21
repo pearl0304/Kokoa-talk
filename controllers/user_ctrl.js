@@ -4,6 +4,7 @@ import {checkDuplicateEmail,
         findeUserData,findUserDataById,findUserDataByEmail,
         updateUserProfileImg,updateUserNick,updateUserStatusMessage,updateAllUserProfileInfo
     } from '../models/user.js'
+    
 import jwt from 'jsonwebtoken'
 
 export const userController = {

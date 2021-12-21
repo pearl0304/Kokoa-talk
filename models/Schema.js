@@ -32,5 +32,19 @@ const userSchema = new Schema({
         default : Date.now
     }
 })
+//type : Schema.Types.ObjectId,
+const channelSchema = new Schema({
+    channelUsers :[Schema.Types.ObjectId],
+    content : {
+        type : String,
+    },
+    channelType : {
+        type:String
+    },
+    created_dt : {
+        type : Date,
+        default : Date.now
+    } 
+})
 
-export {userSchema}
+export {userSchema, channelSchema}
