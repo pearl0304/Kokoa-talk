@@ -31,26 +31,7 @@ export async function findMyChannelList(id){
     try{
         const userId = id
         const myChannelList = await Channel.find({"channelUsers":id})
-        const friendsList = []
-        //console.log(myChannelList)
-        myChannelList.forEach((element)=>{
-            const userArray = element['channelUsers'][0]
-            friendsList.push(userArray)
-        })
-
-        console.log()
-    
-
-
-
-        
-
-
- 
-
-
-
-
+        return myChannelList
     }catch(e){
         console.error(e)
     }

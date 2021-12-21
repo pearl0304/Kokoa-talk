@@ -13,13 +13,14 @@
         </div>
     </header>
     <main class="main-screen">
-        <a href="chat-room.html">                
+    <%for(let i=0; i<friendsData.length; i++){%> 
+        <a href="/chat/room/:<%=friendsData[i]['_id']%>">                      
             <div class="main__list-component list-reapeat">
                 <div class="main__list-component__column">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHNU4GPI1dzdYR2JsI74RoST5lloF0XPzWaPLfwgn9-x3vNa93yI6QaGvw9xXyYvg5RTs&usqp=CAU" 
+                    <img src="<%=friendsData[i]['profileImg']%>" 
                         class="main__list__profile"/>
                     <div class="main__list__text">
-                        <h4 class="main__list__title stress">Kokoa Talk</h4>
+                        <h4 class="main__list__title stress"><%=friendsData[i]['userNick']%></h4>
                         <h6 class="main__list____subtitle">Please check your Kokoa Account Info</h6>
                     </div>
                 </div>
@@ -27,8 +28,9 @@
                     <span class="main__list-component__time">21:22</span>
                     <span class="badge">1</span>
                 </div>
-            </div> 
+            </div>
         </a>
+    <%}%> 
     </main>
 
     <%- include('include/tabbar.ejs')%>
