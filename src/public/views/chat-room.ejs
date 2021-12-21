@@ -18,30 +18,32 @@
     </header>
 
     <main class="main-screen main-chat">
-        <div class="chat__timestamp">
-            Monday, Desember 13, 2021
-        </div>
+        <ul class="chatting-list" id="messages">
+            <div class="chat__timestamp"> Monday, Desember 13, 2021</div>
 
-        <div class="message-row">
-            <img src="http://file3.instiz.net/data/cached_img/upload/2021/01/27/18/2ce2f41f7e9f09c0acc77faac7452dbf.jpg" alt="">
-            <div class="message-row__content">
-                <span class="message__author">루피</span>
-                <div class="message__info">
-                    <span class="message__bubble">Hi!</span>
-                    <span class="message__time">21:27</span>
+            <li class="message-row">
+                <img src="http://file3.instiz.net/data/cached_img/upload/2021/01/27/18/2ce2f41f7e9f09c0acc77faac7452dbf.jpg" alt="">
+                <div class="message-row__content">
+                    <span class="message__friend">루피</span>
+                    <div class="message__info">
+                        <span class="message__bubble">Hi!</span>
+                        <span class="message__time">21:27</span>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </li>
+    
+            <li class="message-row message-row--own">
+                <div class="message-row__content">
+                    <div class="message__info">
+                        <span class="message__bubble">What's Up</span>
+                        <span class="message__time">21:27</span>
+                    </div>
+                </div>
+            </li>
 
-        <div class="message-row message-row--own">
-            <div class="message-row__content">
-                <div class="message__info">
-                    <span class="message__bubble">What's Up</span>
-                    <span class="message__time">21:27</span>
-                </div>
-            </div>
-        </div>
+        </ul>
     </main>  
+
     <form id="message-form">
         <div class="message-form__coulum">
             <i class="far fa-plus-square fa-lg"></i>

@@ -20,15 +20,19 @@
     margin-top: 120px;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 .chat__timestamp{
     color: white;
+    width: 180px;
     background-color: #92a4b2;
     padding: 15px;
     border-radius: 25px;
     font-size: 14px;
+    text-align: center;
     margin-bottom: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    
 }
 .message-row{
      width: 100%;
@@ -42,14 +46,14 @@
     border-radius: 50%;
     margin-right: 10px;
 }
-.message__author{
+.message__friend{
     display: block;
     margin-bottom: 5px;
 }
-.message__author,
+.message__friend,
 .message__time{
     opacity: 0.8;
-    font: 13px;
+    font-size: 14px;
 }
 .message__info{
     display: flex;
@@ -58,7 +62,7 @@
 .message__bubble{
     background-color: white;
     padding: 13px;
-    font-size: 18px;
+    font-size: 15px;
     border-radius: 15px;
     border-top-left-radius: 0px;
     margin-right: 5px;
