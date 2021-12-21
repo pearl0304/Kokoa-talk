@@ -1,10 +1,16 @@
 import { ObjectId } from 'mongodb'
 import {findUserDataById} from '../models/user.js'
-import {checkDuplicateChannel,createChannle} from '../models/chat.js'
+import {checkDuplicateChannel,createChannle,findMyChannelList} from '../models/chat.js'
 
 export const chatController = {
     getChatListPage : async(req,res)=>{
         try{
+            const tokenData = (req.body.userData['_id'])
+            const userId = ObjectId(tokenData)
+
+            const mychannelList = await findMyChannelList(userId)
+            
+
             res.render('chat-list')
         }catch(e){
             console.error(e)
