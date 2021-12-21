@@ -21,7 +21,7 @@
         <ul class="chatting-list" id="messages">
             <div class="chat__timestamp"> Monday, Desember 13, 2021</div>
 
-            <li class="message-row">
+            <!-- <li class="message-row">
                 <img src="http://file3.instiz.net/data/cached_img/upload/2021/01/27/18/2ce2f41f7e9f09c0acc77faac7452dbf.jpg" alt="">
                 <div class="message-row__content">
                     <span class="message__friend">루피</span>
@@ -30,16 +30,16 @@
                         <span class="message__time">21:27</span>
                     </div>
                 </div>
-            </li>
+            </li> -->
     
-            <li class="message-row message-row--own">
+            <!-- <li class="message-row message-row-owner">
                 <div class="message-row__content">
                     <div class="message__info">
                         <span class="message__bubble">What's Up</span>
                         <span class="message__time">21:27</span>
                     </div>
                 </div>
-            </li>
+            </li> -->
 
         </ul>
     </main>  
@@ -49,12 +49,13 @@
             <i class="far fa-plus-square fa-lg"></i>
         </div>
         <div class="message-form__coulum">
-            <input type="text" placeholder="Write a message"/>
+            <input id="message-input" autocomplete="off" type="text" placeholder="Write a message"/>
             <i class="far fa-smile-wink"></i>
             <button>
                 <i class="fas fa-arrow-up"></i>
             </button>
         </div>
     </form>
-    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/chat-room.js"></script>
 <%- include('include/tail.ejs')%>

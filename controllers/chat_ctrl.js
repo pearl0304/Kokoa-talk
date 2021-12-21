@@ -17,13 +17,10 @@ export const chatController = {
             const friend = await findUserDataById(friend_id)
 
 
-            // user data
-            
+            // user data           
             const tokenData = (req.body.userData['_id'])
             const user_id = ObjectId(tokenData)
             const user = await findUserDataById(user_id)
-
-          
 
             res.render('chat-room')
 
