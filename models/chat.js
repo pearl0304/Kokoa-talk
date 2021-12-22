@@ -36,3 +36,13 @@ export async function findMyChannelList(id){
         console.error(e)
     }
 }
+
+export async function findPersonalChannel(createChannelData){
+    try{
+        const channelId = await Channel.findOne({$and:[{"channelUsers":createChannelData['channelUsers'][0]},{"channelUsers":createChannelData['channelUsers'][1]},{"channelType":"personal"}]}).exec()
+        return channelId['_id']
+
+    }catch(e){
+        console.error(e)
+    }
+}

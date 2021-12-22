@@ -8,7 +8,7 @@
             <a href="/chat/list"><i class="fas fa-angle-left fa-2x"></i></a>   
         </div>
         <div class="alt-header__column">
-            <h1 class="alt-header__title">루피</h1>
+            <h1 class="alt-header__title"><%=friendNick%></h1>
         </div>
         <div class="alt-header__column">
             <span><i class="fas fa-search fa-lg"></i></span>
@@ -16,15 +16,20 @@
 
         </div>
     </header>
-
-    <main class="main-screen main-chat">
+    <div id="friendInfo" 
+        channelId='<%=channelId%>' 
+        userId='<%=userId%>' 
+        friendProfileImg="<%=friendProfile%>"
+        friendNick ="<%=friendNick%>"
+        class="hidden">
+    </div>
+    <main id="personal-chat" class="main-screen main-chat">
         <ul class="chatting-list" id="messages">
             <div class="chat__timestamp"> Monday, Desember 13, 2021</div>
-
             <!-- <li class="message-row">
-                <img src="http://file3.instiz.net/data/cached_img/upload/2021/01/27/18/2ce2f41f7e9f09c0acc77faac7452dbf.jpg" alt="">
+                <img src="<%=friendProfile%>" alt="">
                 <div class="message-row__content">
-                    <span class="message__friend">루피</span>
+                    <span class="message__friend"><%=friendNick%></span>
                     <div class="message__info">
                         <span class="message__bubble">Hi!</span>
                         <span class="message__time">21:27</span>
@@ -57,5 +62,5 @@
         </div>
     </form>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/chat-room.js"></script>
+    <script src="/js/chat-room.js" type="text/javascript"></script>
 <%- include('include/tail.ejs')%>

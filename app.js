@@ -2,6 +2,7 @@ import express from "express"
 import mongoose from "mongoose"
 import helmet from "helmet"
 import cookeParser from "cookie-parser"
+import cors from "cors"
 import router from "./routers/main_router.js"
 import dotenv from "dotenv"
 dotenv.config()
@@ -30,7 +31,7 @@ class App {
         this.app.use(helmet({
             contentSecurityPolicy: false,
         }))
-    
+        this.app.use(cors())
         this.app.use(cookeParser())
         this.app.use(express.json())
         this.app.use(express.urlencoded({extended:false}))

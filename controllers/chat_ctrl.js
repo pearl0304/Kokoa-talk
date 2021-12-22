@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb'
 import {findUserDataById} from '../models/user.js'
-import {checkDuplicateChannel,createChannle,findMyChannelList} from '../models/chat.js'
+import {checkDuplicateChannel,createChannle,findMyChannelList,findPersonalChannel} from '../models/chat.js'
 
 export const chatController = {
     getChatListPage : async(req,res)=>{
@@ -40,7 +40,6 @@ export const chatController = {
             const friendId = ObjectId(id)
             const friend = await findUserDataById(friendId)
 
-
             // user data           
             const tokenData = (req.body.userData['_id'])
             const userId = ObjectId(tokenData)
@@ -52,15 +51,26 @@ export const chatController = {
                 channelUsers : [friendId,userId],
                 channelType : 'personal'
             }
- 
 
             const existedChannel = await checkDuplicateChannel(createChannelData)
-            if(existedChannel == 'existed_channel'){
-                res.render('chat-room')
-            }else{
+
+            if(existedChannel == 'can_make_channel'){
                 await createChannle(createChannelData)
-                res.render('chat-room')
             }
+
+            const channelId = await findPersonalChannel(createChannelData)
+            
+            const ChannelData = {
+                channelId : channelId,
+                friendId : friendId,
+                friendNick : friend['userNick'],
+                friendProfile : friend['profileImg'],
+                userId : userId,
+                userNick : user['userNick'],
+                userProfile : user['profileImg']
+            }
+
+            res.render('chat-room',ChannelData)
 
         }catch(e){
             console.error(e)
