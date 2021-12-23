@@ -8,6 +8,8 @@ import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
 dotenv.config()
 
+import {insertMessages} from "./models/chat.js"
+
 const app = new App().app
 const PORT = 7000 
 const server = http.createServer(app)
@@ -42,8 +44,9 @@ io.on('connection', (socket) => {
 
     socket.on('join_room',(channelId)=>{
         socket.join(channelId)
-        socket.on('send_message',(message,channelId)=>{
-            console.log('send_message : ' + message )
+        socket.on('send_message',(data,message)=>{
+            data['content'] = message
+            insertMessages(data)
 
             // recived message data render to chat-room page
             io.to(channelId).emit('send_message',ownerId,message,time)

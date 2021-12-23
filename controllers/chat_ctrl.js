@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb'
 import {findUserDataById} from '../models/user.js'
-import {checkDuplicateChannel,createChannle,findMyChannelList,findPersonalChannel} from '../models/chat.js'
+import {checkDuplicateChannel,createChannle,findMyChannelList,findPersonalChannel,insertMessages} from '../models/chat.js'
 
 export const chatController = {
     getChatListPage : async(req,res)=>{
@@ -58,10 +58,11 @@ export const chatController = {
                 await createChannle(createChannelData)
             }
 
-            const channelId = await findPersonalChannel(createChannelData)
-            
+            const channelInfo = await findPersonalChannel(createChannelData)
+           
             const ChannelData = {
-                channelId : channelId,
+                channelId : channelInfo['_id'],
+                channelType : channelInfo['channelType'],
                 friendId : friendId,
                 friendNick : friend['userNick'],
                 friendProfile : friend['profileImg'],
@@ -75,5 +76,5 @@ export const chatController = {
         }catch(e){
             console.error(e)
         }
-    }
+    },
 }

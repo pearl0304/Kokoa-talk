@@ -1,12 +1,19 @@
 var socket = io();
 var channelId = document.getElementById('friendInfo').getAttribute('channelId')
+var channelType = document.getElementById('friendInfo').getAttribute('channelType')
 var userId = document.getElementById('friendInfo').getAttribute('userId')
+var friendId = document.getElementById('friendInfo').getAttribute('friendId')
 var friendProfileImg = document.getElementById('friendInfo').getAttribute('friendProfileImg')
 var friendNick = document.getElementById('friendInfo').getAttribute('friendNick')
-console.log(friendProfileImg)
 var form = document.getElementById('message-form')
 var input =  document.getElementById('message-input')
 var messages = document.getElementById('messages')
+
+var data = {
+    channelId : channelId,
+    channelType : channelType,
+    userId :userId,
+}
 
 // join the personal room
 socket.emit('join_room',channelId)
@@ -15,7 +22,7 @@ socket.emit('join_room',channelId)
 form.addEventListener("submit",function(e){
     e.preventDefault();
     if(input.value){
-        socket.emit('send_message',input.value,channelId)
+        socket.emit('send_message',data,input.value)
         input.value=''
     }
 })

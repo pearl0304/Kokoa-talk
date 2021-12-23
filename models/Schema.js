@@ -32,12 +32,10 @@ const userSchema = new Schema({
         default : Date.now
     }
 })
-//type : Schema.Types.ObjectId,
+
+
 const channelSchema = new Schema({
     channelUsers :[Schema.Types.ObjectId],
-    content : {
-        type : String,
-    },
     channelType : {
         type:String
     },
@@ -47,4 +45,27 @@ const channelSchema = new Schema({
     } 
 })
 
-export {userSchema, channelSchema}
+const messageSchema = new Schema({
+    channelId : {
+        type : Schema.Types.ObjectId,
+        required : true
+    },
+    channelType : {
+        type : String,
+        required : true
+    },
+    userId : {
+        type : Schema.Types.ObjectId,
+        required : true
+    },
+    content : {
+        type : String,
+        required : true
+    },
+    reg_dt : {
+        type : Date,
+        default : Date.now
+    }
+
+})
+export {userSchema, channelSchema,messageSchema}

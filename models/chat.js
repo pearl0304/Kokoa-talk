@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
-import {channelSchema} from './Schema.js'
+import {channelSchema, messageSchema} from './Schema.js'
 var Channel = mongoose.model('Channel',channelSchema)
+var Message = mongoose.model('Message',messageSchema)
 
 
 export async function checkDuplicateChannel(createChannelData){
@@ -39,8 +40,18 @@ export async function findMyChannelList(id){
 
 export async function findPersonalChannel(createChannelData){
     try{
-        const channelId = await Channel.findOne({$and:[{"channelUsers":createChannelData['channelUsers'][0]},{"channelUsers":createChannelData['channelUsers'][1]},{"channelType":"personal"}]}).exec()
-        return channelId['_id']
+        const channelInfo = await Channel.findOne({$and:[{"channelUsers":createChannelData['channelUsers'][0]},{"channelUsers":createChannelData['channelUsers'][1]},{"channelType":"personal"}]}).exec()
+        return channelInfo
+
+    }catch(e){
+        console.error(e)
+    }
+}
+
+export async function insertMessages(data){
+    try{
+        const message = new Message(data)
+        await message.save()
 
     }catch(e){
         console.error(e)
