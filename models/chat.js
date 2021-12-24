@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { ObjectId } from 'mongodb';
 import {channelSchema, messageSchema} from './Schema.js'
 var Channel = mongoose.model('Channel',channelSchema)
 var Message = mongoose.model('Message',messageSchema)
@@ -57,3 +58,13 @@ export async function insertMessages(data){
         console.error(e)
     }
 }
+
+export async function findMessagesByChId(id){
+    try{
+        const messageData = await Message.find({"channelId":id}).limit(20)
+        return messageData
+
+    }catch(e){
+        console.error(e)}
+}
+

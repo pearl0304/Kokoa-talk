@@ -38,10 +38,6 @@ io.on('connection', (socket) => {
     console.log('a user connected');
     const ownerId = socket.ownerId
 
-    socket.on('disconnect',()=>{
-        console.log('user disconnected')
-    })
-
     socket.on('join_room',(channelId)=>{
         socket.join(channelId)
         socket.on('send_message',(data,message)=>{
@@ -51,6 +47,10 @@ io.on('connection', (socket) => {
             // recived message data render to chat-room page
             io.to(channelId).emit('send_message',ownerId,message,time)
         })
+    })
+    
+    socket.on('disconnect',()=>{
+        console.log('user disconnected')
     })
   });
 

@@ -1,6 +1,11 @@
+import moment from 'moment'
 import { ObjectId } from 'mongodb'
 import {findUserDataById} from '../models/user.js'
-import {checkDuplicateChannel,createChannle,findMyChannelList,findPersonalChannel,insertMessages} from '../models/chat.js'
+import {checkDuplicateChannel,
+        createChannle,
+        findMyChannelList,
+        findPersonalChannel,
+        findMessagesByChId} from '../models/chat.js'
 
 export const chatController = {
     getChatListPage : async(req,res)=>{
@@ -45,21 +50,26 @@ export const chatController = {
             const userId = ObjectId(tokenData)
             const user = await findUserDataById(userId)
 
-
             // Create Channel
             const createChannelData = {
                 channelUsers : [friendId,userId],
                 channelType : 'personal'
             }
 
+            // Check duplicate Channel
             const existedChannel = await checkDuplicateChannel(createChannelData)
 
             if(existedChannel == 'can_make_channel'){
                 await createChannle(createChannelData)
             }
 
+            // Get Channel data
             const channelInfo = await findPersonalChannel(createChannelData)
-           
+            
+            // Get Message data
+            const messageData = await findMessagesByChId(channelInfo['_id'])
+            const messageDataCount = messageData.length
+            
             const ChannelData = {
                 channelId : channelInfo['_id'],
                 channelType : channelInfo['channelType'],
@@ -68,7 +78,9 @@ export const chatController = {
                 friendProfile : friend['profileImg'],
                 userId : userId,
                 userNick : user['userNick'],
-                userProfile : user['profileImg']
+                userProfile : user['profileImg'],
+                messageData : messageData,
+                messageDataCount: messageDataCount             
             }
 
             res.render('chat-room',ChannelData)

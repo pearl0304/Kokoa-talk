@@ -9,6 +9,7 @@ var form = document.getElementById('message-form')
 var input =  document.getElementById('message-input')
 var messages = document.getElementById('messages')
 
+
 var data = {
     channelId : channelId,
     channelType : channelType,
@@ -29,7 +30,11 @@ form.addEventListener("submit",function(e){
 
 // Recive data for render (data : message data sent by the user)
 socket.on('send_message',function(ownerId,message,time){
- 
+    MakeMessageDiv(ownerId,message,time)
+})
+
+
+function MakeMessageDiv(ownerId,message,time){
     const chatTimestamp = document.createElement('div')
     const messageRow = document.createElement('li')
     const messageContent = document.createElement('div')
@@ -69,5 +74,5 @@ socket.on('send_message',function(ownerId,message,time){
     messageRow.appendChild(messageContent)
     messages.appendChild(messageRow)
     window.scrollTo(0, document.body.scrollHeight);
-})
 
+}
