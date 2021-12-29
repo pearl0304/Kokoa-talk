@@ -61,7 +61,7 @@ export async function insertMessages(data){
 
 export async function findMessagesByChId(id){
     try{
-        const messageData = await Message.find({"channelId":id}).limit(20)
+        const messageData = await Message.find({"channelId":id}).limit(20).sort({"_id" : -1})
         return messageData
 
     }catch(e){

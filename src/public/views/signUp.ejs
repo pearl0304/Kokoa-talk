@@ -14,12 +14,12 @@
                 <img src="/public/images/plus.svg" alt="plus-icon" class="plus-icon">
             </label>
         </div>
-        <input type="email" name="userEmail" placeholder="Email or phone number" required/>
-        <input type="text" name="userNick" minlength="2" maxlength="8" 
+        <input id ="userEmail" type="email" name="userEmail" placeholder="Email or phone number" required/>
+        <input id = "userNick" type="text" name="userNick" minlength="2" maxlength="8" 
                placeholder="Please enter the nickname you want to use (2~8)" required/>
-        <input type="password" name="userPw" minlength="4" max="12" 
+        <input id = "userPw" type="password" name="userPw" minlength="4" maxlength="12" 
                 placeholder="Password (4~12)" required/>
         <input type="submit" value="Sign Up" />
     </form> 
-
+<script src="/js/signUp-validation.js"></script>
 <%- include('include/tail.ejs')%>

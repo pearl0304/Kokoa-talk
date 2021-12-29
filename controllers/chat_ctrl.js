@@ -68,8 +68,7 @@ export const chatController = {
             
             // Get Message data
             const messageData = await findMessagesByChId(channelInfo['_id'])
-            const messageDataCount = messageData.length
-            
+            const messageDataCount = messageData.length            
             const ChannelData = {
                 channelId : channelInfo['_id'],
                 channelType : channelInfo['channelType'],

@@ -22,25 +22,29 @@ export const userController = {
             if(req.file){
                 filename = `/uploads/profile/${req.file.filename}` 
             }
+
+            if(req.body.userEmail == null && req.body.userNick == null && req.body.userPw == null) {
+                res.send("<script>alert('There no user information. Please write sign up data');location.href='/user/signUp';</script>")
+            }
+
             const data = {
-                userEmail : req.body.userEmail,
-                userNick : req.body.userNick,
+                userEmail : (req.body.userEmail).toLowerCase(),
+                userNick : (req.body.userNick).toLowerCase(),
                 userPw : req.body.userPw,
                 profileImg : filename ,
                 statusMessage : ''
             }
 
-            //check duplicate Email and Nick
+            // NOTE : "check duplicate Email and Nick"
             const emailCheck = await checkDuplicateEmail(data)
             if(emailCheck == 'DUPLICATE'){
                 res.send("<script>alert('This EMAIL is already in use');history.back();</script>")
             }
 
             await insertUserData(data)
-            const userData = await findUserDataByEmail(data)
-            console.log(userData['_id'])
+           const userData = await findUserDataByEmail(data)
      
-            // create token
+            // NODE : "create token"
             const created_token = jwt.sign(
                 {
                     userEmail:userData['userEmail'],
@@ -51,7 +55,7 @@ export const userController = {
                     expiresIn: '1day'
                 }
             )
-            // Save token in Cookie
+            // NOTE : "Save token in Cookie"
             res.cookie('jwtToken',created_token)
             req.body.userData={userEmail:userData['userEmail'], _id: userData['_id']}
             res.send("<script>location.href='/friends'</script>")
@@ -72,7 +76,7 @@ export const userController = {
 
             const userData = await findeUserData(data)
  
-            // create token
+            // NOTE : "create token"
             const created_token = jwt.sign(
                 {
                     userEmail:userData['userEmail'],
@@ -83,7 +87,7 @@ export const userController = {
                     expiresIn: '1day'
                 }
             )
-            // Save token in Cookie
+            // NOTE : "Save token in Cookie"
             res.cookie('jwtToken',created_token)
             req.body.userData={userEmail:userData['userEmail'], _id:userData['_id']}
             res.send("<script>location.href='/friends'</script>")
