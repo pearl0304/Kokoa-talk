@@ -1,9 +1,6 @@
-const signUpForm = document.querySelector("#signUp-form")
+const loginForm = document.querySelector("#login-form")
 const emailInput = document.querySelector("#userEmail")
-const nickInput = document.querySelector("#userNick")
 const pwInput = document.querySelector("#userPw")
-
-
 
 // NOTE : Check special character for email
 function checkSpecial(string) { 
@@ -26,14 +23,6 @@ function removeEmojis (string) {
     }
 }
 
-// NOTE : Check nick name length 
-function checkNicknameLength(nick){
-    if (nick.length < 2){
-        return 'NICK-LESS'
-    }else if (nick.length > 8){
-        return 'NICK-MORE'
-    }
-}
 // NOTE : check password length
 function checkPassLength(password){
     if (password.length < 4){
@@ -43,12 +32,10 @@ function checkPassLength(password){
     }
 }
 
-function handleSignUpForm(e){
-    e.preventDefault()
-
+function handleLoginForm(e){
+    e.preventDefualt()
     let emailResult = checkSpecial(emailInput.value)
     let passwordResult = removeEmojis(pwInput.value)
-    let nickLengthResult = checkNicknameLength(nickInput.value)
     let pwLengthResult = checkPassLength(pwInput.value)
 
 
@@ -58,23 +45,11 @@ function handleSignUpForm(e){
         emailInput.value = ''
         return false
     }
-    
+
     // NOTE : "check specail Emoji"
     else if(passwordResult == 'EMOJI') {
         alert('Emoji could not be used as a password')
         pwInput.value = ''
-        return false
-    }
-
-    // NOTE : "check Nick Name letters length"
-    else if(nickLengthResult == 'NICK-LESS'){
-        alert('Please enter a nickname with at least two letters')
-        nickInput.value = ''
-        return false
-    } 
-    else if (nickLengthResult == 'NICK-MORE'){
-        alert ('The nickname could not be more than 8 characers')
-        nickInput.value = ''
         return false
     }
 
@@ -90,15 +65,7 @@ function handleSignUpForm(e){
         return false
     }
     else {
-        signUpForm.submit()
+        loginForm.submit()
     }
+
 }
-
-
-
-
-
-
-
-
-

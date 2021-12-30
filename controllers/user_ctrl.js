@@ -23,7 +23,7 @@ export const userController = {
                 filename = `/uploads/profile/${req.file.filename}` 
             }
 
-            if(req.body.userEmail == null && req.body.userNick == null && req.body.userPw == null) {
+            if(req.body.userEmail == null || req.body.userNick == null || req.body.userPw == null) {
                 res.send("<script>alert('There no user information. Please write sign up data');location.href='/user/signUp';</script>")
             }
 
@@ -65,6 +65,10 @@ export const userController = {
     }, 
     login : async(req,res)=>{
         try{
+
+            if(req.body.userEmail == null || req.body.userPw == null) {
+                res.send("<script>alert('There no user information. Please write sign up data');location.href='/';</script>")
+            }
             const data = {
                 userEmail : req.body.userEmail,
                 userPw : req.body.userPw
@@ -130,7 +134,7 @@ export const userController = {
         const tokenData = req.body.userData['_id']
         const _id = ObjectId(tokenData)
         const userData = await findUserDataById(_id)
-        const editUserNick = req.body.userNick
+        const editUserNick = (req.body.userNick).toLowerCase()
         const editStatusMessage = req.body.statusMessage
         
 
