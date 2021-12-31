@@ -42,6 +42,7 @@ io.on('connection', (socket) => {
         socket.join(channelId)
         socket.on('send_message',(data,message)=>{
             data['content'] = message
+            console.log(data)
             insertMessages(data)
 
             // recived message data render to chat-room page

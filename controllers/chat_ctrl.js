@@ -7,25 +7,6 @@ import {checkDuplicateChannel,
         findPersonalChannel,
         findMessagesByChId} from '../models/chat.js'
 
-
-// const getdate =(message)=>{
-//     return moment(message.reg_dt).format('MMMM Do YYYY')
-// }
-
-
-// const groupBy =  (data, key)=> {
-//     return data.reduce((carry, el)=> {
-//         var group = el[key];
-
-//         if (carry[group] === undefined) {
-//             carry[group] = []
-//         }
-
-//         carry[group].push(el)
-//         return carry
-//     }, {})
-// }
-
 export const chatController = {
     getChatListPage : async(req,res)=>{
         try{
@@ -95,11 +76,9 @@ export const chatController = {
     ajaxPostUsersData : async (req,res)=>{
         try{
         const channelId = ObjectId(req.body.channelId)  
-        const userId = ObjectId(req.body.userId)
         const friendId = ObjectId(req.body.friendId)
 
         const friendData = await findUserDataById(friendId)
-        const userData = await findUserDataById(userId)
 
         const messages = await findMessagesByChId(channelId)
 
@@ -110,7 +89,16 @@ export const chatController = {
             console.error(e)    
         }
        
+    },
+    ajaxPostFriendData : async(req,res) =>{
+        try{
+            const friendId = ObjectId(req.body.friendId)
+
+            const friendData = await findUserDataById(friendId)
+            res.send({friendNick : friendData['userNick'],friendProfileImg :friendData['profileImg']})
+
+        }catch(e){
+            console.error(e)
+        }
     }
-
-
 }

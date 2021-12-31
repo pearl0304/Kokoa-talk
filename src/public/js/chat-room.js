@@ -3,11 +3,11 @@ var channelId = document.getElementById('friendInfo').getAttribute('channelId')
 var channelType = document.getElementById('friendInfo').getAttribute('channelType')
 var userId = document.getElementById('friendInfo').getAttribute('userId')
 var friendId = document.getElementById('friendInfo').getAttribute('friendId')
-// var friendProfileImg = document.getElementById('friendInfo').getAttribute('friendProfileImg')
-// var friendNick = document.getElementById('friendInfo').getAttribute('friendNick')
-// var form = document.getElementById('message-form')
-// var input =  document.getElementById('message-input')
-// var messages = document.getElementById('messages')
+var chatTitle = document.getElementById('chat_title')
+
+var form = document.getElementById('message-form')
+var input =  document.getElementById('message-input')
+var messages = document.getElementById('messages')
 
 // NOTE : Get user information when joingin a channel
 function ajaxPostUsersData(){
@@ -17,57 +17,99 @@ function ajaxPostUsersData(){
         dataType : 'JSON',
         data : {
             "channelId" : channelId,
-            "userId" : userId,
             "friendId" : friendId
         },
         success : function(data){
             const messageData = data['messages']
             const friendNick = data['friendNick']
             const friendProfileImg = data['friendProfileImg']
-            console.log(friendProfileImg)
- 
+            let messageDate =  new Date(messageData[0]['reg_dt']).toDateString()
+            makeChatTitle(friendNick)
+            makeTimeDiv(messageDate)
+        
             messageData.forEach(element => {
                 const ownerId = element['userId']
                 const message = element['content']
                 const reg_dtTime = new Date(element['reg_dt']).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
                 const time = reg_dtTime.toLowerCase() 
-
-                MakeMessageDiv(ownerId,message,time,friendNick,friendProfileImg)
+                            
+                makeMessageDiv(ownerId,message,time,friendNick,friendProfileImg)
             });
+
+            let dateArr = []
+            for(let i=0; i<messageData.length; i++){
+                let messageDate =  new Date(messageData[i]['reg_dt']).toDateString()
+                dateArr.unshift(messageDate)
+
+                console.log('messageDate : ', messageDate)
+                const nextDate = dateArr[1]
+                console.log('nextDate :' , nextDate)
+            }
         },
     })
 }
 
 
 
-
-
-
 // join the personal room
 socket.emit('join_room',channelId)
 
-// // Send message data from client to server
-// form.addEventListener("submit",function(e){
-//     e.preventDefault();
-//     if(input.value){
-//         socket.emit('send_message',data,input.value)
-//         input.value=''
-//     }
-// })
 
-// // Recive data for render (data : message data sent by the user)
-// socket.on('send_message',function(ownerId,message,time){
-//     MakeMessageDiv(ownerId,message,time)
-// })
+const data = {
+    channelId : channelId,
+    channelType : channelType,
+    userId : userId
+}
 
 
+// Send message data from client to server
+form.addEventListener("submit",function(e){
+    e.preventDefault();
+    if(input.value){
+        socket.emit('send_message',data,input.value)
+        input.value=''
+    }
+})
+
+// Recive data for render (data : message data sent by the user)
+socket.on('send_message',function(ownerId,message,time){
+    
+    $.ajax({
+        url : '/chat/room/friend',
+        type : 'POST',
+        dataType : 'JSON',
+        data : {
+            "friendId" : friendId
+        },
+        success : function(data){
+            const friendNick = data['friendNick']
+            const friendProfileImg = data['friendProfileImg']
+            
+            makeMessageDiv(ownerId,message,time,friendNick,friendProfileImg)
+        }
+    })    
+})
 
 
 
 
 
+function makeChatTitle(friendNick){
+    const altHeaderTitle = document.createElement('h1')
+    altHeaderTitle.classList.add('alt-header__title')
+    altHeaderTitle.innerText = friendNick
+    chatTitle.append(altHeaderTitle)
+}
 
-function MakeMessageDiv(ownerId,message,time,friendNick,friendProfileImg){
+
+function makeTimeDiv(date){
+    const chatTimestamp = document.createElement('div')
+    chatTimestamp.classList.add('chat__timestamp')
+    chatTimestamp.innerText=date
+    messages.prepend(chatTimestamp)
+}
+
+function makeMessageDiv(ownerId,message,time,friendNick,friendProfileImg){
     const chatTimestamp = document.createElement('div')
     const messageRow = document.createElement('li')
     const messageContent = document.createElement('div')
@@ -109,9 +151,5 @@ function MakeMessageDiv(ownerId,message,time,friendNick,friendProfileImg){
     window.scrollTo(0, document.body.scrollHeight);
 
 }
-
-
-
-
 
 ajaxPostUsersData()
