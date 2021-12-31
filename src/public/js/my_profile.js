@@ -6,7 +6,6 @@ const profileEdit = document.getElementById('profile-edit')
 const profileEditBtn = document.getElementById('profile-edit-btn')
 const HIDDEN_CLASSNAME ='hidden'
 
-// NOTE : nick-name status-message length check
 const profileEditForm = document.getElementById('profile-edit-form')
 const nickInput = document.getElementById('userNick') 
 const statusInput = document.getElementById('statusMessage')
@@ -24,7 +23,6 @@ function clickEdit(){
     editBtn.addEventListener("click",showEdit)
 }
 
-// NOTE : Check nick name length 
 function checkNicknameLength(nick){
     if (nick.length < 2){
         return 'NICK-LESS'
@@ -33,7 +31,6 @@ function checkNicknameLength(nick){
     }
 }
 
-// NOTE : status message length 
 function checkStatusMessageLength(message){
     if (message.length > 60){
         return 'MESSAGE-MORE'

@@ -7,6 +7,25 @@ import {checkDuplicateChannel,
         findPersonalChannel,
         findMessagesByChId} from '../models/chat.js'
 
+
+// const getdate =(message)=>{
+//     return moment(message.reg_dt).format('MMMM Do YYYY')
+// }
+
+
+// const groupBy =  (data, key)=> {
+//     return data.reduce((carry, el)=> {
+//         var group = el[key];
+
+//         if (carry[group] === undefined) {
+//             carry[group] = []
+//         }
+
+//         carry[group].push(el)
+//         return carry
+//     }, {})
+// }
+
 export const chatController = {
     getChatListPage : async(req,res)=>{
         try{
@@ -39,47 +58,31 @@ export const chatController = {
     },
     getChatRoom : async(req,res)=>{
         try{
-            // friend data
             const params = req.params['id']
             const id =  params.slice(1,params.length)
             const friendId = ObjectId(id)
-            const friend = await findUserDataById(friendId)
-
-            // user data           
+     
             const tokenData = (req.body.userData['_id'])
             const userId = ObjectId(tokenData)
-            const user = await findUserDataById(userId)
 
-            // Create Channel
             const createChannelData = {
                 channelUsers : [friendId,userId],
                 channelType : 'personal'
             }
 
-            // Check duplicate Channel
             const existedChannel = await checkDuplicateChannel(createChannelData)
 
             if(existedChannel == 'can_make_channel'){
                 await createChannle(createChannelData)
             }
 
-            // Get Channel data
             const channelInfo = await findPersonalChannel(createChannelData)
-            
-            // Get Message data
-            const messageData = await findMessagesByChId(channelInfo['_id'])
-            const messageDataCount = messageData.length            
+                       
             const ChannelData = {
                 channelId : channelInfo['_id'],
                 channelType : channelInfo['channelType'],
                 friendId : friendId,
-                friendNick : friend['userNick'],
-                friendProfile : friend['profileImg'],
-                userId : userId,
-                userNick : user['userNick'],
-                userProfile : user['profileImg'],
-                messageData : messageData,
-                messageDataCount: messageDataCount             
+                userId : userId,            
             }
 
             res.render('chat-room',ChannelData)
@@ -88,4 +91,26 @@ export const chatController = {
             console.error(e)
         }
     },
+
+    ajaxPostUsersData : async (req,res)=>{
+        try{
+        const channelId = ObjectId(req.body.channelId)  
+        const userId = ObjectId(req.body.userId)
+        const friendId = ObjectId(req.body.friendId)
+
+        const friendData = await findUserDataById(friendId)
+        const userData = await findUserDataById(userId)
+
+        const messages = await findMessagesByChId(channelId)
+
+
+        res.send({messages :messages, friendNick : friendData['userNick'],friendProfileImg :friendData['profileImg']})
+    
+        }catch(e){
+            console.error(e)    
+        }
+       
+    }
+
+
 }

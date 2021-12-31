@@ -1,5 +1,6 @@
 <%- include('include/head.ejs')%>
     <title>Chat Room - Kokoa Talk</title>
+    <script src="/js/common/jquery-3.6.0.min.js"></script>
 </head>
 <body id="chat-screen">
     <%- include('include/status_bar.ejs')%>
@@ -8,7 +9,7 @@
             <a href="/chat/list"><i class="fas fa-angle-left fa-2x"></i></a>   
         </div>
         <div class="alt-header__column">
-            <h1 class="alt-header__title"><%=friendNick%></h1>
+            <h1 class="alt-header__title">friendNick</h1>
         </div>
         <div class="alt-header__column">
             <span><i class="fas fa-search fa-lg"></i></span>
@@ -16,13 +17,7 @@
 
         </div>
     </header>
-    <div id="friendInfo" 
-        channelId="<%=channelId%>" 
-        channelType="<%=channelType%>"
-        userId="<%=userId%>" 
-        friendId="<%=friendId%>"
-        friendProfileImg="<%=friendProfile%>"
-        friendNick ="<%=friendNick%>"
+    <div id="friendInfo"  channelId="<%=channelId%>" channelType="<%=channelType%>"userId="<%=userId%>" friendId="<%=friendId%>"
         class="hidden">
     </div>
     <main id="personal-chat" class="main-screen main-chat">
@@ -30,7 +25,7 @@
             <div class="chat__timestamp"> Monday, Desember 13, 2021</div>
            
             <!-- <li class="message-row">
-                <img src="<%=friendProfile%>" alt="">
+                <img src="#" alt="">
                 <div class="message-row__content">
                     <span class="message__friend">butter</span>
                     <div class="message__info">

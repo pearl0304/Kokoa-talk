@@ -65,7 +65,7 @@ export async function updateUserNick(_id,userNick){
     try{
         await User.updateOne({_id:_id},{$set:{userNick:userNick}}).exec()
     }catch(e){
-
+        console.error(e)
     }
 }
 
@@ -73,7 +73,7 @@ export async function updateUserStatusMessage(_id,statusMessage){
     try{
         await User.updateOne({_id:_id},{$set:{statusMessage:statusMessage}}).exec()
     }catch(e){
-
+        console.error(e)
     }
 }
 

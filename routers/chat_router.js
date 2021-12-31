@@ -5,6 +5,7 @@ import { mainController } from "../controllers/main_ctrl.js";
 
 chatRouter.get('/list',mainController.getTokenData,chatController.getChatListPage)
 chatRouter.get('/room/:id',mainController.getTokenData,chatController.getChatRoom)
+chatRouter.post('/room/users',mainController.getTokenData, chatController.ajaxPostUsersData)
 
 
 
