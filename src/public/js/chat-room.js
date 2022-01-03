@@ -9,6 +9,7 @@ var form = document.getElementById('message-form')
 var input =  document.getElementById('message-input')
 var messages = document.getElementById('messages')
 
+
 // NOTE : Get user information when joingin a channel
 function ajaxPostUsersData(){
     $.ajax({
@@ -157,5 +158,11 @@ function makeMessageDiv(ownerId,message,time,friendNick,friendProfileImg){
     window.scrollTo(0, document.body.scrollHeight);
 
 }
+
+
+// document.addEventListener('scroll',function(){
+//     var currentScrollValue = document.documentElement.scrollTop
+//     console.log(currentScrollValue)
+// })
 
 ajaxPostUsersData()
