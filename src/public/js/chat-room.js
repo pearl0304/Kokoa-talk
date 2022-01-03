@@ -23,28 +23,53 @@ function ajaxPostUsersData(){
             const messageData = data['messages']
             const friendNick = data['friendNick']
             const friendProfileImg = data['friendProfileImg']
-            let messageDate =  new Date(messageData[0]['reg_dt']).toDateString()
             makeChatTitle(friendNick)
-            makeTimeDiv(messageDate)
         
+            const  messageDateArr= []
             messageData.forEach(element => {
                 const ownerId = element['userId']
                 const message = element['content']
+                const messageDate =  new Date(element['reg_dt']).toDateString()
                 const reg_dtTime = new Date(element['reg_dt']).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
                 const time = reg_dtTime.toLowerCase() 
-                            
+                let printedDate = ''
+
+
+                // Note : "Sort message by date"
+                messageDateArr.unshift(messageDate)
+                const nextDate = messageDateArr[1]
+                if(nextDate == undefined){
+                    printedDate = messageDate
+                }else if(messageDate == nextDate){
+                    printedDate = nextDate
+                }else if (messageDate !== nextDate){
+                    printedDate = messageDate
+                }
+                
+                if(messageDate !== nextDate){
+                    const chatTimestamp = document.createElement('div')
+                    chatTimestamp.classList.add('chat__timestamp')
+                    chatTimestamp.innerText = printedDate
+                    messages.appendChild(chatTimestamp)
+                }
+
+                console.log('printedDate : ',printedDate)
+                console.log('----------------')
+
+
+
+
+              
+
+
+
+                
+
+            
+                
                 makeMessageDiv(ownerId,message,time,friendNick,friendProfileImg)
             });
-
-            let dateArr = []
-            for(let i=0; i<messageData.length; i++){
-                let messageDate =  new Date(messageData[i]['reg_dt']).toDateString()
-                dateArr.unshift(messageDate)
-
-                console.log('messageDate : ', messageDate)
-                const nextDate = dateArr[1]
-                console.log('nextDate :' , nextDate)
-            }
+    
         },
     })
 }
@@ -102,12 +127,12 @@ function makeChatTitle(friendNick){
 }
 
 
-function makeTimeDiv(date){
-    const chatTimestamp = document.createElement('div')
-    chatTimestamp.classList.add('chat__timestamp')
-    chatTimestamp.innerText=date
-    messages.prepend(chatTimestamp)
-}
+// function makeDateDiv(date){
+//     const chatTimestamp = document.createElement('div')
+//     chatTimestamp.classList.add('chat__timestamp')
+//     chatTimestamp.innerText=date
+//     messages.prepend(chatTimestamp)
+// }
 
 function makeMessageDiv(ownerId,message,time,friendNick,friendProfileImg){
     const chatTimestamp = document.createElement('div')
@@ -117,12 +142,15 @@ function makeMessageDiv(ownerId,message,time,friendNick,friendProfileImg){
     const messageBubble = document.createElement('span')
     const messageTime = document.createElement('span')
 
-    chatTimestamp.classList.add('chatTimestamp')
+    chatTimestamp.classList.add('chat__timestamp')
     messageRow.classList.add('message-row')
     messageContent.classList.add('message-row__content')
     messageInfo.classList.add('message__info')
     messageBubble.classList.add('message__bubble')
     messageTime.classList.add('message__time')
+
+    // date
+
 
     if(ownerId == userId){
         messageRow.classList.add('message-row-owner')
