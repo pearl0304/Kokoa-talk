@@ -7,7 +7,7 @@ chatRouter.get('/list',mainController.getTokenData,chatController.getChatListPag
 chatRouter.get('/room/:id',mainController.getTokenData,chatController.getChatRoom)
 chatRouter.post('/room/users',mainController.getTokenData, chatController.ajaxPostUsersData)
 chatRouter.post('/room/friend',mainController.getTokenData, chatController.ajaxPostFriendData)
-
+chatRouter.post('/room/page/:height',mainController.getTokenData,chatController.ajaxPostMessagePagination)
 
 
 

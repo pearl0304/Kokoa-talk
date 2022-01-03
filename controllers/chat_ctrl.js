@@ -5,7 +5,8 @@ import {checkDuplicateChannel,
         createChannle,
         findMyChannelList,
         findPersonalChannel,
-        findMessagesByChId} from '../models/chat.js'
+        findMessagesByChId,
+        messagePagination} from '../models/chat.js'
 
 export const chatController = {
     getChatListPage : async(req,res)=>{
@@ -99,6 +100,22 @@ export const chatController = {
 
         }catch(e){
             console.error(e)
+        }
+    },
+    ajaxPostMessagePagination : async(req,res)=>{
+        try{
+            const channelId = ObjectId(req.body.channelId) 
+            const params = req.params.height
+            const height = Number(params.slice(1,params.length)) 
+
+
+
+            //const page = messagePagination()
+
+
+
+        }catch(e){
+            console.error(e)    
         }
     }
 }

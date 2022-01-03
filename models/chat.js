@@ -61,10 +61,22 @@ export async function insertMessages(data){
 
 export async function findMessagesByChId(id){
     try{
-        const messageData = await Message.find({"channelId":id}).limit(20)
+        const limt = 10
+        const messageData = await Message.find({"channelId":id}).limit(limt)
         return messageData
 
     }catch(e){
         console.error(e)}
+}
+export async function messagePagination(id,page){
+    try{
+        const limt = 10
+        const messageData = await Message.find({"channelId":id}).limit(limt).skip(limt*page)
+        return messageData
+
+    }catch{
+        console.error(e)
+    }
+
 }
 
