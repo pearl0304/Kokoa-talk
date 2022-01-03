@@ -47,13 +47,9 @@ function ajaxPostUsersData(){
                 }
                 
                 if(messageDate !== nextDate){
-                    const chatTimestamp = document.createElement('div')
-                    chatTimestamp.classList.add('chat__timestamp')
-                    chatTimestamp.innerText = printedDate
-                    messages.appendChild(chatTimestamp)
+                    makeDateDiv(printedDate)
                 }
           
-                
                 makeMessageDiv(ownerId,message,time,friendNick,friendProfileImg)
             });
     
