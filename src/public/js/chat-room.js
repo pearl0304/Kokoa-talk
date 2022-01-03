@@ -114,7 +114,7 @@ function makeDateDiv(date){
     const chatTimestamp = document.createElement('div')
     chatTimestamp.classList.add('chat__timestamp')
     chatTimestamp.innerText=date
-    messages.prepend(chatTimestamp)
+    messages.append(chatTimestamp)
 }
 
 function makeMessageDiv(ownerId,message,time,friendNick,friendProfileImg){
