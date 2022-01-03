@@ -52,20 +52,7 @@ function ajaxPostUsersData(){
                     chatTimestamp.innerText = printedDate
                     messages.appendChild(chatTimestamp)
                 }
-
-                console.log('printedDate : ',printedDate)
-                console.log('----------------')
-
-
-
-
-              
-
-
-
-                
-
-            
+          
                 
                 makeMessageDiv(ownerId,message,time,friendNick,friendProfileImg)
             });
@@ -127,30 +114,25 @@ function makeChatTitle(friendNick){
 }
 
 
-// function makeDateDiv(date){
-//     const chatTimestamp = document.createElement('div')
-//     chatTimestamp.classList.add('chat__timestamp')
-//     chatTimestamp.innerText=date
-//     messages.prepend(chatTimestamp)
-// }
+function makeDateDiv(date){
+    const chatTimestamp = document.createElement('div')
+    chatTimestamp.classList.add('chat__timestamp')
+    chatTimestamp.innerText=date
+    messages.prepend(chatTimestamp)
+}
 
 function makeMessageDiv(ownerId,message,time,friendNick,friendProfileImg){
-    const chatTimestamp = document.createElement('div')
     const messageRow = document.createElement('li')
     const messageContent = document.createElement('div')
     const messageInfo = document.createElement('div')
     const messageBubble = document.createElement('span')
     const messageTime = document.createElement('span')
 
-    chatTimestamp.classList.add('chat__timestamp')
     messageRow.classList.add('message-row')
     messageContent.classList.add('message-row__content')
     messageInfo.classList.add('message__info')
     messageBubble.classList.add('message__bubble')
     messageTime.classList.add('message__time')
-
-    // date
-
 
     if(ownerId == userId){
         messageRow.classList.add('message-row-owner')
