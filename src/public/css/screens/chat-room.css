@@ -2,6 +2,9 @@
     background-color: #abc1d1;
     height: 100%;
 }
+#chat-screen::-webkit-scrollbar {
+    display: none;
+}
 #chat-screen .alt-header,
 #chat-screen .status-bar{
     position: fixed;
@@ -13,7 +16,6 @@
 #chat-screen .status-bar{z-index: 2;}
 
 #chat-screen .alt-header{
-    top: 10px;
     z-index: 1;
 }
 .main-chat{
