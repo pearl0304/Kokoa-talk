@@ -10,11 +10,25 @@ var input =  document.getElementById('message-input')
 var messages = document.getElementById('messages')
 
 
+function getCurrentPage(){
+    document.addEventListener('scroll',function(){
+        var scrollLocation =  Math.ceil(document.documentElement.scrollTop) 
+        var innerHeight = Math.ceil(window.innerWidth) 
+        var fullHeight  = Math.floor((document.body.scrollHeight)*(0.7)) 
+        var page = 1
+        
+        if(scrollLocation + innerHeight >= fullHeight ){
+            console.log('스크롤이 바닥이다')
+            let height = scrollLocation + innerHeight
+            page = Math.floor(height / fullHeight)+1                
+        }
+    })
+}
 
-
-
-// NOTE : Get user information when joingin a channel
 function ajaxPostUsersData(){
+
+    
+
     $.ajax({
         url : '/chat/room/users',
         type : 'POST',
@@ -64,42 +78,22 @@ function ajaxPostUsersData(){
 
 
 
-    document.addEventListener('scroll',function(){
-        var scrollTop = document.documentElement.scrollTop
-        var scrollHeight = document.body.scrollHeight
-        var innerHeight = window.innerHeight
 
-        // console.log('scrollTop',scrollTop)
-        // console.log('scrollHeight',scrollHeight)
-        // console.log('innerHeight', innerHeight)
+function getMessages(page){
 
-        var height = scrollTop-60 <0
-        
-        console.log(height)
-
-
-        // if(scrollTop + scrollHeight > innerHeight){
-        //     $.ajax({
-        //         url : `/chat/room/page/:${height}`,
-        //         type : 'POST',
-        //         dataType : 'JSON',
-        //         data : {                
-        //             "channelId" : channelId,
-        //         },
-        //         success : function(data){
-        //             console.log(data)
-        //         }
-        //     })
-        // }
-
-        
-
-
-
-    
-
-        
-    })
+    // $.ajax({
+    //     url : `/chat/room/page`,
+    //     type : 'POST',
+    //     dataType : 'JSON',
+    //     data : {                
+    //         "channelId" : channelId,
+    //     },
+    //     success : function(data){
+    //         console.log(data)
+    //     }
+    // })
+       
+}
 
 
 
@@ -209,3 +203,4 @@ function makeMessageDiv(ownerId,message,time,friendNick,friendProfileImg){
 
 
 ajaxPostUsersData()
+

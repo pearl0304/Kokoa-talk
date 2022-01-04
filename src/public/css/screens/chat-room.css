@@ -2,9 +2,9 @@
     background-color: #abc1d1;
     height: 100%;
 }
-#chat-screen::-webkit-scrollbar {
+/* #chat-screen::-webkit-scrollbar {
     display: none;
-}
+} */
 #chat-screen .alt-header,
 #chat-screen .status-bar{
     position: fixed;
